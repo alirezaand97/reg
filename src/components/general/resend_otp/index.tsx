@@ -1,5 +1,5 @@
-import { convertSecondsToTime } from "@/utils/convert-seconds-to-time";
-import useResendOTP from "@/hooks/use-resend-otp";
+import { convertSecondsToTime } from "@/utils/convert_seconds_to_time";
+import useResendOTP from "@/hooks/use_resend_otp";
 
 interface Props {
   className?: string;

@@ -1,10 +1,18 @@
 import { pageNames } from "./constant";
-import { Home } from "./pages";
+import { Lead, LeadOtp, Opprtunity } from "./pages";
 
 const routes: { path: string; element: JSX.Element }[] = [
   {
-    path: pageNames.home,
-    element: <Home />,
+    path: pageNames.lead,
+    element: <Lead />,
+  },
+  {
+    path: pageNames.lead_otp,
+    element: <LeadOtp />,
+  },
+  {
+    path: pageNames.opportunity,
+    element: <Opprtunity />,
   },
 ];
 export default routes;
