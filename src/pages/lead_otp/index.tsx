@@ -7,31 +7,29 @@ import { mobileRegex } from "@/constant/regex_format";
 import { CreateLeadReq, RequestLeadReq } from "@/models/auth.model";
 import { useRequestLeadMutation } from "@/store/services/auth";
 import { Form, Formik, useFormik } from "formik";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
-  const createLeadSchema = Yup.object().shape({
-    otp: Yup.string()
-      .label("verificationCode")
-      .required("کد تایید را وارد کنید"),
-  });
+  const createLeadSchema = Yup.string()
+    .label("verificationCode")
+    .required("کد تایید را وارد کنید");
 
-  const handleCreateLead = (
+  const handleCreateLead = async (
     values: Pick<CreateLeadReq, "verificationCode">
   ) => {
-    console.log(values);
+    const isValidOtp = await createLeadSchema.isValid(
+      formik.values.verificationCode
+    );
+    if (isValidOtp) {
+      //do something
+    }
   };
 
   const handleChangeOtp = (otp: string) => {
-    console.log(formik.errors);
     formik.setFieldValue("verificationCode", otp);
-    if (otp.length == 6) {
-      console.log(formik.values);
-      formik.setErrors({});
-    }
   };
 
   const formik = useFormik({
@@ -39,11 +37,9 @@ const Lead = () => {
       verificationCode: "",
     },
     onSubmit: (values) => {
-      console.log("clicked");
       handleCreateLead(values);
     },
     enableReinitialize: true,
-    validationSchema: createLeadSchema,
   });
 
   return (
