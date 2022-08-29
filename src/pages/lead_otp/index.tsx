@@ -8,11 +8,13 @@ import { CreateLeadReq, RequestLeadReq } from "@/models/auth.model";
 import { useRequestLeadMutation } from "@/store/services/auth";
 import { Form, Formik, useFormik } from "formik";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
+
   const createLeadSchema = Yup.object().shape({
     verificationCode: Yup.string()
       .label("verificationCode")

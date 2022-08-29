@@ -13,10 +13,6 @@ import * as Yup from "yup";
 const Lead = () => {
   let navigate = useNavigate();
   const [requestLead, { data, error, isLoading }] = useRequestLeadMutation();
-  const [formValues, setFormValues] = useState({
-    phone: "",
-    userCaptchaCode: "",
-  });
 
   const handleRequestLead = async (values: RequestLeadReq) => {
     try {
@@ -42,18 +38,15 @@ const Lead = () => {
     <AuthLayout>
       <div className="h-full ">
         <Formik
-          initialValues={formValues}
+          initialValues={{
+            phone: "",
+            userCaptchaCode: "",
+          }}
           validationSchema={createLeadSchema}
           enableReinitialize
           onSubmit={handleRequestLead}
         >
-          {({
-            handleChange,
-            errors,
-            values,
-            handleBlur,
-            touched,
-          }) => (
+          {({ handleChange, errors, values, handleBlur, touched }) => (
             <Form>
               <IInput
                 type="text"

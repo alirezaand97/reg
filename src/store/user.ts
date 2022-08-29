@@ -1,10 +1,16 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { UserInterface } from "@/models/user.model";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState = {};
+const initialState: UserInterface = { phone: "", token: "" };
 const user = createSlice({
   initialState,
   name: "user",
-  reducers: { setUser: () => {} },
+  reducers: {
+    setUser: (state, action: PayloadAction<UserInterface>) => {
+      return action.payload;
+    },
+  },
 });
 
+export const { setUser } = user.actions;
 export default user;
