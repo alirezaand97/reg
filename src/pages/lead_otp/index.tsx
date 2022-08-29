@@ -1,4 +1,4 @@
-import { IInput, IButton } from "@/components/general";
+import { IInput, IButton, ResendOtp } from "@/components/general";
 import Captcha from "@/components/general/captcha";
 import OtpInput from "@/components/general/otp_Input";
 import { AuthLayout } from "@/components/layouts";
@@ -13,18 +13,21 @@ import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
+  const [otp, setotp] = useState("");
   const createLeadSchema = Yup.object().shape({
-    otp: Yup.string().label("otp").required("کد تایید را وارد کنید"),
+    otp: Yup.string()
+      .label("verificationCode")
+      .required("کد تایید را وارد کنید"),
   });
 
-  const handleCreateLead = async (
+  const handleCreateLead = (
     values: Pick<CreateLeadReq, "verificationCode">
   ) => {
-    await console.log(values);
+    console.log(values);
   };
 
-  const handleChangeOtp = (second) => {
-    third;
+  const handleChangeOtp = (otp: string) => {
+    setotp(otp);
   };
 
   return (
@@ -32,7 +35,7 @@ const Lead = () => {
       <div className="h-full ">
         <Formik
           initialValues={{
-            verificationCode: "",
+            verificationCode: otp,
           }}
           validationSchema={createLeadSchema}
           enableReinitialize
@@ -45,23 +48,30 @@ const Lead = () => {
             handleBlur,
             touched,
             setFieldValue,
-          }) => (
-            <Form>
-              <OtpInput
-                value={otp}
-                onChange={handleChangeOtp}
-                autoFocus
-                OTPLength={6}
-                otpType="number"
-                disabled={false}
-                className=""
-              />
-
-              <IButton className="bg-primary-200 text-white" type="submit">
-                ثبت نام
-              </IButton>
-            </Form>
-          )}
+          }) => {
+            console.log(errors);
+            return (
+              <Form>
+                <OtpInput
+                  value={values.verificationCode}
+                  onChange={handleChangeOtp}
+                  autoFocus
+                  OTPLength={6}
+                  otpType="number"
+                  disabled={false}
+                  className=""
+                />
+                <ResendOtp
+                  onResendClick={() => console.log("resend")}
+                  onTimerComplete={() => console.log("completed")}
+                  maxTime={120}
+                />
+                <IButton className="bg-primary-200 text-white" type="submit">
+                  ثبت نام
+                </IButton>
+              </Form>
+            );
+          }}
         </Formik>
       </div>
     </AuthLayout>
