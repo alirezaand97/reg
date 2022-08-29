@@ -1,0 +1,18 @@
+@font-face {
+  font-family: YekanBakh;
+  src: url("../fonts/yekan/Yekan-Bakh-Regular.eot");
+  src: url("../fonts/yekan/Yekan-Bakh-Regular.eot") format("embedded-opentype");
+  src: url("../fonts/yekan/Yekan-Bakh-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: YekanBakhMedium;
+  src: url("../fonts/yekan/Yekan-Bakh-Medium.eot");
+  src: url("../fonts/yekan/Yekan-Bakh-Medium.eot") format("embedded-opentype");
+  src: url("../fonts/yekan/Yekan-Bakh-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: YekanBakhBold;
+  src: url("../fonts/yekan/Yekan-Bakh-Bold.eot");
+  src: url("../fonts/yekan/Yekan-Bakh-Bold.eot") format("embedded-opentype");
+  src: url("../fonts/yekan/Yekan-Bakh-Bold.ttf") format("truetype");
+}
