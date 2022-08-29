@@ -12,3 +12,8 @@ export interface RequestLeadRes {
   expireDate: string;
   codeLength: number;
 }
+
+export interface CreateLeadReq {
+  phone: string;
+  verificationCode: string;
+}

@@ -15,7 +15,6 @@ const IInput = forwardRef(
     ref: Ref<HTMLInputElement>
   ) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    console.log(touched)
     return (
       <div className={`max-w-full w-full`}>
         <label htmlFor={props.id || props.name} className="text-sm mb-2">

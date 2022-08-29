@@ -1,4 +1,5 @@
-import { IInput, ISwiIButtontch } from "@/components/general";
+import { IInput, IButton } from "@/components/general";
+import Captcha from "@/components/general/captcha";
 import { AuthLayout } from "@/components/layouts";
 import { pageNames } from "@/constant";
 import { mobileRegex } from "@/constant/regex_format";
@@ -17,13 +18,14 @@ const Lead = () => {
     userCaptchaCode: "",
   });
 
-  const handleRequestLead = (values: RequestLeadReq) => {
-    requestLead(values)
-      .unwrap()
-      .then((data) => {
-        console.log(data);
-        navigate(pageNames.lead_otp);
-      });
+  const handleRequestLead = async (values: RequestLeadReq) => {
+    try {
+      const data = await requestLead(values).unwrap();
+      console.log(data);
+      navigate(pageNames.lead_otp);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const createLeadSchema = Yup.object().shape({
@@ -45,7 +47,13 @@ const Lead = () => {
           enableReinitialize
           onSubmit={handleRequestLead}
         >
-          {({ handleChange, errors, values, handleBlur }) => (
+          {({
+            handleChange,
+            errors,
+            values,
+            handleBlur,
+            touched,
+          }) => (
             <Form>
               <IInput
                 type="text"
@@ -56,24 +64,30 @@ const Lead = () => {
                 error={errors.phone}
                 value={values.phone}
                 onBlur={handleBlur}
+                touched={touched.phone}
               />
-              <IInput
-                type="text"
-                name="userCaptchaCode"
-                placeholder="کد را وارد کنید"
-                label="کد امنیتی"
-                onChange={handleChange}
-                error={errors.userCaptchaCode}
-                value={values.userCaptchaCode}
-                onBlur={handleBlur}
-              />
-              <ISwiIButtontch
+              <div>
+                <IInput
+                  type="text"
+                  name="userCaptchaCode"
+                  placeholder="کد را وارد کنید"
+                  label="کد امنیتی"
+                  onChange={handleChange}
+                  error={errors.userCaptchaCode}
+                  value={values.userCaptchaCode}
+                  onBlur={handleBlur}
+                  touched={touched.userCaptchaCode}
+                />
+                <Captcha />
+              </div>
+
+              <IButton
                 className="bg-primary-200 text-white"
                 type="submit"
                 disabled={isLoading}
               >
                 ثبت نام
-              </ISwiIButtontch>
+              </IButton>
             </Form>
           )}
         </Formik>

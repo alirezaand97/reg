@@ -1,4 +1,4 @@
-import useOTP from "@/hooks/use-otp";
+import useOTP from "@/hooks/use_otp";
 import { useMemo } from "react";
 import PinItem from "./pin-item";
 
