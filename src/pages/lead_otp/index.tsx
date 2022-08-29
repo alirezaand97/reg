@@ -13,16 +13,16 @@ import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
-  const createLeadSchema = Yup.string()
-    .label("verificationCode")
-    .required("کد تایید را وارد کنید");
+  const createLeadSchema = Yup.object().shape({
+    verificationCode: Yup.string()
+      .label("verificationCode")
+      .required("کد تایید را وارد کنید"),
+  });
 
   const handleCreateLead = async (
     values: Pick<CreateLeadReq, "verificationCode">
   ) => {
-    const isValidOtp = await createLeadSchema.isValid(
-      formik.values.verificationCode
-    );
+    const isValidOtp = await createLeadSchema.isValid(formik.values);
     if (isValidOtp) {
       //do something
     }
