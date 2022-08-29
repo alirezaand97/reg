@@ -6,14 +6,13 @@ import { pageNames } from "@/constant";
 import { mobileRegex } from "@/constant/regex_format";
 import { CreateLeadReq, RequestLeadReq } from "@/models/auth.model";
 import { useRequestLeadMutation } from "@/store/services/auth";
-import { Form, Formik } from "formik";
+import { Form, Formik, useFormik } from "formik";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
-  const [otp, setotp] = useState("");
   const createLeadSchema = Yup.object().shape({
     otp: Yup.string()
       .label("verificationCode")
@@ -27,52 +26,47 @@ const Lead = () => {
   };
 
   const handleChangeOtp = (otp: string) => {
-    setotp(otp);
+    console.log(formik.errors);
+    formik.setFieldValue("verificationCode", otp);
+    if (otp.length == 6) {
+      console.log(formik.values);
+      formik.setErrors({});
+    }
   };
+
+  const formik = useFormik({
+    initialValues: {
+      verificationCode: "",
+    },
+    onSubmit: (values) => {
+      console.log("clicked");
+      handleCreateLead(values);
+    },
+    enableReinitialize: true,
+    validationSchema: createLeadSchema,
+  });
 
   return (
     <AuthLayout>
       <div className="h-full ">
-        <Formik
-          initialValues={{
-            verificationCode: otp,
-          }}
-          validationSchema={createLeadSchema}
-          enableReinitialize
-          onSubmit={handleCreateLead}
-        >
-          {({
-            handleChange,
-            errors,
-            values,
-            handleBlur,
-            touched,
-            setFieldValue,
-          }) => {
-            console.log(errors);
-            return (
-              <Form>
-                <OtpInput
-                  value={values.verificationCode}
-                  onChange={handleChangeOtp}
-                  autoFocus
-                  OTPLength={6}
-                  otpType="number"
-                  disabled={false}
-                  className=""
-                />
-                <ResendOtp
-                  onResendClick={() => console.log("resend")}
-                  onTimerComplete={() => console.log("completed")}
-                  maxTime={120}
-                />
-                <IButton className="bg-primary-200 text-white" type="submit">
-                  ثبت نام
-                </IButton>
-              </Form>
-            );
-          }}
-        </Formik>
+        <form onSubmit={formik.handleSubmit}>
+          <OtpInput
+            value={formik.values.verificationCode}
+            onChange={handleChangeOtp}
+            autoFocus
+            OTPLength={6}
+            otpType="number"
+            disabled={false}
+          />
+          <ResendOtp
+            onResendClick={() => console.log("resend")}
+            onTimerComplete={() => console.log("completed")}
+            maxTime={120}
+          />
+          <IButton className="bg-primary-200 text-white" type="submit">
+            ثبت نام
+          </IButton>
+        </form>
       </div>
     </AuthLayout>
   );
