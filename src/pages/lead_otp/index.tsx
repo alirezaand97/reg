@@ -5,11 +5,13 @@ import { pageNames } from "@/constant";
 import { CreateLeadReq } from "@/models/auth.model";
 import { useCreateLeadMutation } from "@/store/services/auth";
 import { useFormik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import { parse } from "query-string";
 
 const Lead = () => {
-  let navigate = useNavigate();
+  const { search } = useLocation();
+  const { phone } = parse(search);
   const [createLead, { data }] = useCreateLeadMutation();
   const formik = useFormik({
     initialValues: {
@@ -48,7 +50,7 @@ const Lead = () => {
       <div className="h-full ">
         <div className="flex flex-col items-center text-center pb-12">
           <div className="mb-2 text-lg flex items-center">
-            <div className="font-yekanBold">09910426174</div>
+            <div className="font-yekanBold">{phone}</div>
             <Link
               to={{ pathname: pageNames.lead }}
               className="text-primary-200 mx-4 text-base"

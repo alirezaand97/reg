@@ -37,7 +37,7 @@ const IInput = forwardRef(
                 ? "text"
                 : "password"
             }
-            className={`w-full h-full text-base border bg-white rounded-md flex items-center outline-none px-4 hover:border-neutral-300 hover:bg-neutral-50 focus:border-2 focus:border-primary-200 placeholder:text-sm
+            className={`i-input
              ${error && touched ? "border-red-500 focus:border-red-500" : ""}
                ${props.disabled ? "bg-neutral-100 hover:bg-neutral-100 " : ""}
                ${className ? className : ""}

@@ -35,7 +35,7 @@ const ITooltip = (props: Props) => {
         leaveTo="opacity-0"
       >
         <div
-          className={`absolute  min-w-max px-2 py-1 my-1 bg-gray-700 rounded-md text-center text-white text-sm -translate-x-1/2 left-1/2 ${
+          className={`i-tooltip ${
             placement == "top" ? "bottom-full" : "top-full"
           }
           ${className}

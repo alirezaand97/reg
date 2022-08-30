@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<{}> {
 const IButton = ({ className, Icon, children, ...props }: Props) => {
   return (
     <button
-      className={`relative h-12 w-full px-2 max-w-full items-center justify-center  font-yekanMedium rounded-md text-base 
+      className={`i-button
      ${className}`}
       {...props}
     >

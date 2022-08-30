@@ -36,7 +36,7 @@ const IModal = ({ isOpen, onClose, children }: Props) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md relative transform overflow-hidden rounded-md bg-white p-6 pt-8  text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="i-modal-panel">
                   <div
                     className="absolute top-3 right-2.5 cursor-pointer"
                     onClick={onClose}

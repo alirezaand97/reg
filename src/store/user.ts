@@ -6,14 +6,11 @@ const user = createSlice({
   initialState,
   name: "user",
   reducers: {
-    setUserPhone: (state, action: PayloadAction<string>) => {
-      state.phone = action.payload;
-    },
-    setToken: (state, action: PayloadAction<string>) => {
-      state.token = action.payload;
+    setUser: (state, action: PayloadAction<UserInterface>) => {
+      return action.payload;
     },
   },
 });
 
-export const { setUserPhone } = user.actions;
+export const { setUser } = user.actions;
 export default user;

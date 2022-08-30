@@ -1,10 +1,1 @@
-{
-    "version": 3,
-    "mappings": "ACAA,SAAS,CAAT,IAAS,CACT,SAAS,CAAT,UAAS,CACT,SAAS,CAAT,SAAS,CAET,AAAA,IAAI,AAAC,CACH,SAAS,CAAE,GAAG,CACd,MAAM,CAAN,UAAM,CACP",
-    "sources": [
-        "../sass/main.scss",
-        "../sass/_initial.scss"
-    ],
-    "names": [],
-    "file": "main.min.css"
-}
+{"version":3,"sources":["../sass/_initial.scss"],"names":[],"mappings":"AAAA,cAAA,CACA,oBAAA,CACA,mBAAA,CAEA,KACE,aAAA,CACA,gBAAA,CAAA,CAGF,UACE,6GAAA,CAAA,CAGF,SACE,qMAAA,CAAA,CAGF,SACE,uFAAA,CAAA,CAGF,eACE,sIAAA,CAAA,CAGF,iBACE,kKAAA,CAAA,CAGF,aACE,uJAAA,CAAA,CAGF,WACE,wHAAA,CAAA","file":"main.min.css"}

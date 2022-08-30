@@ -27,7 +27,7 @@ const iconColors = {
 const Alert = ({ severity, className, onClose, children }: Props) => {
   return (
     <div
-      className={`w-full max-w-full flex justify-between items-center p-4 mb-4 text-base rounded-md ${servities[severity]} ${className}`}
+      className={`.a-alert ${servities[severity]} ${className}`}
     >
       <div>{children}</div>
       {onClose && (

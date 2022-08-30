@@ -61,7 +61,7 @@ const PinItem = ({
       disabled={disabled}
       onFocus={handelInputFocus}
       value={value || ""}
-      className={`min-w-0 max-w-[48px] flex-1 h-inp mx-1 px-0 text-center outline-none border border-border rounded-md focus:border-primary ${className}`}
+      className={`min-w-0  max-w-[48px] flex-1 h-inp mx-1 text-center  ${className}`}
       {...rest}
     />
   );

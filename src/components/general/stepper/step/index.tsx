@@ -17,7 +17,7 @@ const IStep = (props: StepInterface) => {
       onClick={onClick}
     >
       <div
-        className={`w-5 h-5 relative rounded-full flex items-center before:content-[''] before:absolute  justify-center before:w-1/2 before:h-1/2 before:rounded-full ${
+        className={`i-step-item${
           active
             ? `bg-[#dbe7ff]  before:bg-primary-200 `
             : " before:bg-gray-100"

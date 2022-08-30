@@ -1,5 +1,6 @@
 import { IButton, IInput } from "@/components/general";
 import Captcha from "@/components/general/captcha";
+import ISelect from "@/components/general/select";
 import Logo from "@/components/icons/Logo";
 import { AuthLayout } from "@/components/layouts";
 import { pageNames } from "@/constant";
@@ -7,6 +8,7 @@ import { mobileRegex } from "@/constant/regex_format";
 import { RequestLeadReq } from "@/models/auth.model";
 import { useRequestLeadMutation } from "@/store/services/auth";
 import { Form, Formik } from "formik";
+import { stringifyUrl } from "query-string";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
@@ -17,11 +19,15 @@ const Lead = () => {
 
   const handleRequestLead = async (values: RequestLeadReq) => {
     try {
-      const data = await requestLead(values).unwrap();
-      console.log(data);
-      navigate(pageNames.lead_otp);
+      await requestLead(values).unwrap();
+      navigate(
+        stringifyUrl({
+          url: pageNames.lead_otp,
+          query: { phone: values.phone },
+        })
+      );
     } catch (e) {
-      console.log(e);
+      console.log("request lead error:", e);
     }
   };
 
@@ -32,6 +38,8 @@ const Lead = () => {
       .required("شماره همراه ضروری است"),
     userCaptchaCode: Yup.string()
       .label("username")
+      .min(5)
+      .max(5)
       .required("کد امنیتی را وارد کنید"),
   });
 
