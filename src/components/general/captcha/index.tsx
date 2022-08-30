@@ -11,15 +11,20 @@ const Captcha = () => {
     refetch();
   };
   return (
-    <div className="w-full flex justify-between items-center ">
-      <div className="cursor-pointer" onClick={reCaptcha}>
-        <RefreshIcon className="fill-sky-700" />
+    <div className="flex justify-end">
+      <div className="max-w-max flex h-12 justify-between items-center">
+        <div
+          className="cursor-pointer mx-2 bg-sky-50 h-12 w-12 flex justify-center items-center rounded-sm"
+          onClick={reCaptcha}
+        >
+          <RefreshIcon className="fill-sky-700 w-7" />
+        </div>
+        <img
+          className="cursor-pointer h-full rounded-sm"
+          src={Base64ToPngConvertor(data?.captcha)}
+          onClick={reCaptcha}
+        />
       </div>
-      <img
-        className="cursor-pointer h-ull"
-        src={Base64ToPngConvertor(data?.captcha)}
-        onClick={reCaptcha}
-      />
     </div>
   );
 };

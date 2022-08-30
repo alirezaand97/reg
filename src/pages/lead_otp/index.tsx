@@ -1,19 +1,24 @@
-import { IInput, IButton, ResendOtp } from "@/components/general";
-import Captcha from "@/components/general/captcha";
+import { IButton, ResendOtp } from "@/components/general";
 import OtpInput from "@/components/general/otp_Input";
 import { AuthLayout } from "@/components/layouts";
-import { pageNames } from "@/constant";
-import { mobileRegex } from "@/constant/regex_format";
-import { CreateLeadReq, RequestLeadReq } from "@/models/auth.model";
-import { useRequestLeadMutation } from "@/store/services/auth";
-import { Form, Formik, useFormik } from "formik";
-import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { CreateLeadReq } from "@/models/auth.model";
+import { useCreateLeadMutation } from "@/store/services/auth";
+import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
+  const [createLead, { data }] = useCreateLeadMutation();
+  const formik = useFormik({
+    initialValues: {
+      verificationCode: "",
+    },
+    onSubmit: (values) => {
+      handleCreateLead(values);
+    },
+    enableReinitialize: true,
+  });
 
   const createLeadSchema = Yup.object().shape({
     verificationCode: Yup.string()
@@ -24,25 +29,18 @@ const Lead = () => {
   const handleCreateLead = async (
     values: Pick<CreateLeadReq, "verificationCode">
   ) => {
-    const isValidOtp = await createLeadSchema.isValid(formik.values);
+    const isValidOtp = await createLeadSchema.isValid(values);
     if (isValidOtp) {
-      //do something
+      await createLead({
+        phone: "",
+        verificationCode: values.verificationCode,
+      }).unwrap();
     }
   };
 
   const handleChangeOtp = (otp: string) => {
     formik.setFieldValue("verificationCode", otp);
   };
-
-  const formik = useFormik({
-    initialValues: {
-      verificationCode: "",
-    },
-    onSubmit: (values) => {
-      handleCreateLead(values);
-    },
-    enableReinitialize: true,
-  });
 
   return (
     <AuthLayout>
@@ -62,7 +60,7 @@ const Lead = () => {
             maxTime={120}
           />
           <IButton className="bg-primary-200 text-white" type="submit">
-            ثبت نام
+            ادامه
           </IButton>
         </form>
       </div>

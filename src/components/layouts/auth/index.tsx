@@ -5,11 +5,28 @@ type Props = { children: JSX.Element };
 
 const AuthLayout = (props: Props) => {
   return (
-    <div className="h-screen py-8">
-      <div className="max-w-5xl mx-4 md:mx-auto h-full grid grid-cols-1 md:grid-cols-3">
-        <div className="col-span-1 shadow-lg">{props.children}</div>
-        <div className="col-span-2 hidden order-first md:order-last md:flex justify-center items-center">
-          <img src={LEAD} alt="" />
+    <div className="h-screen bg-gray-100">
+      <div className="h-auto sm:h-full ">
+        <div className="container mx-auto py-6 md:py-16 px-6  h-full">
+          <div className="flex justify-center items-center flex-wrap h-full">
+            <div className="xl:w-9/12 w-full h-full">
+              <div className="block bg-white shadow-lg rounded-lg h-full">
+                <div className="lg:flex py-12 px-2 md:px-12  flex-wrap h-full">
+                  <div className="w-full lg:w-5/12 px-4  h-full">
+                    <div className="md:mx-6">{props.children}</div>
+                  </div>
+                  <div className="hidden lg:w-7/12 lg:flex pr-8 items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none h-full">
+                    <div className="text-white w-full h-full">
+                      <img
+                        src={LEAD}
+                        className="w-full rounded-lg h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -17,3 +17,7 @@ export interface CreateLeadReq {
   phone: string;
   verificationCode: string;
 }
+
+export interface CreateLeadRes {
+  token?: string;
+}

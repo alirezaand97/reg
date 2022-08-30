@@ -1,4 +1,10 @@
-import { Captcha, RequestLeadReq, RequestLeadRes } from "@/models/auth.model";
+import {
+  Captcha,
+  CreateLeadReq,
+  CreateLeadRes,
+  RequestLeadReq,
+  RequestLeadRes,
+} from "@/models/auth.model";
 import service from "./index";
 
 export const auth = service.injectEndpoints({
@@ -15,8 +21,19 @@ export const auth = service.injectEndpoints({
       }),
       invalidatesTags: ["auth"],
     }),
+    createLead: build.mutation<CreateLeadRes, CreateLeadReq>({
+      query: (params) => ({
+        url: "CreateLead",
+        method: "POST",
+        body: params,
+      }),
+    }),
   }),
 });
 
-export const { endpoints, useGenerateCaptchaQuery, useRequestLeadMutation } =
-  auth;
+export const {
+  endpoints,
+  useGenerateCaptchaQuery,
+  useRequestLeadMutation,
+  useCreateLeadMutation,
+} = auth;

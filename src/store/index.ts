@@ -17,7 +17,7 @@ import service from "./services";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: [service.reducerPath],
+  blacklist: [service.reducerPath, user.name],
 };
 
 const reducers = combineReducers({

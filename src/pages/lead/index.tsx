@@ -1,17 +1,18 @@
-import { IInput, IButton } from "@/components/general";
+import { IButton, IInput } from "@/components/general";
 import Captcha from "@/components/general/captcha";
+import Logo from "@/components/icons/Logo";
 import { AuthLayout } from "@/components/layouts";
 import { pageNames } from "@/constant";
 import { mobileRegex } from "@/constant/regex_format";
 import { RequestLeadReq } from "@/models/auth.model";
 import { useRequestLeadMutation } from "@/store/services/auth";
 import { Form, Formik } from "formik";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
+
   const [requestLead, { data, error, isLoading }] = useRequestLeadMutation();
 
   const handleRequestLead = async (values: RequestLeadReq) => {
@@ -37,6 +38,11 @@ const Lead = () => {
   return (
     <AuthLayout>
       <div className="h-full ">
+        <div className="flex flex-col items-center pb-12">
+          <div className="mb-8"><Logo className="w-48"/></div>
+          <h1 className="mb-2 text-xl font-yekanBold">ثبت نام در سامانه آگاه اکسپرس</h1>
+          <p className="text-sm text-center">برای استفاده از خدمات آگاه، حساب کاربری خود را ایجاد کنید</p>
+        </div>
         <Formik
           initialValues={{
             phone: "",
@@ -48,18 +54,21 @@ const Lead = () => {
         >
           {({ handleChange, errors, values, handleBlur, touched }) => (
             <Form>
-              <IInput
-                type="text"
-                name="phone"
-                placeholder="مثلا 09110000000"
-                label="شماره همراه"
-                onChange={handleChange}
-                error={errors.phone}
-                value={values.phone}
-                onBlur={handleBlur}
-                touched={touched.phone}
-              />
               <div>
+                <IInput
+                  type="text"
+                  name="phone"
+                  placeholder="مثلا 09110000000"
+                  label="شماره همراه"
+                  onChange={handleChange}
+                  error={errors.phone}
+                  value={values.phone}
+                  onBlur={handleBlur}
+                  touched={touched.phone}
+                  className="text-left"
+                />
+              </div>
+              <div className="mt-5">
                 <IInput
                   type="text"
                   name="userCaptchaCode"
@@ -71,16 +80,22 @@ const Lead = () => {
                   onBlur={handleBlur}
                   touched={touched.userCaptchaCode}
                 />
-                <Captcha />
+                <div className="mt-3">
+                  <Captcha />
+                </div>
               </div>
-
-              <IButton
-                className="bg-primary-200 text-white"
-                type="submit"
-                disabled={isLoading}
-              >
-                ثبت نام
-              </IButton>
+              <div className="mt-8">
+                <IButton
+                  className="bg-primary-200 text-white"
+                  type="submit"
+                  disabled={isLoading}
+                >
+                  ثبت نام
+                </IButton>
+              </div>
+              <div className="mt-2 text-primary-200 text-sm">
+                قبلاً ثبت نام کرده‌اید؟ وارد شوید
+              </div>
             </Form>
           )}
         </Formik>
