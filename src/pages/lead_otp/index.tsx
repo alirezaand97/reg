@@ -68,7 +68,7 @@ const Lead = () => {
             value={formik.values.verificationCode}
             onChange={handleChangeOtp}
             autoFocus
-            OTPLength={6}
+            OTPLength={5}
             otpType="number"
             disabled={false}
           />

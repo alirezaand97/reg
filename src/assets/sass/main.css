@@ -1,7 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 body {
   direction: rtl;
   @apply font-yekan;
@@ -28,7 +27,7 @@ body {
 }
 
 .i-step-item {
-  @apply w-5 h-5 relative rounded-full flex items-center before:content-[''] before:absolute  justify-center before:w-1/2 before:h-1/2 before:rounded-full;
+  @apply w-5 h-5 relative rounded-full flex items-center before:content-[""] before:absolute  justify-center before:w-1/2 before:h-1/2 before:rounded-full;
 }
 
 .i-tooltip {
@@ -36,12 +35,28 @@ body {
 }
 
 .scroll {
-  overflow-y: scroll;
-}
-.scroll::-webkit-scrollbar {
-  width: 0px;
-}
-.scroll::-webkit-scrollbar-thumb {
-  background: #cbd5e0;
+  overflow: scroll;
 }
 
+.scroll::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+
+/* Track */
+.scroll::-webkit-scrollbar-track {
+  border-radius: 100vh;
+  background: #edf2f7;
+}
+
+/* Handle */
+.scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 100vh;
+  border: 3px solid #edf2f7;
+}
+
+/* Handle on hover */
+.scroll::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}/*# sourceMappingURL=main.css.map */
