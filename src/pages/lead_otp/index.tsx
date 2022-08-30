@@ -1,10 +1,11 @@
 import { IButton, ResendOtp } from "@/components/general";
 import OtpInput from "@/components/general/otp_Input";
 import { AuthLayout } from "@/components/layouts";
+import { pageNames } from "@/constant";
 import { CreateLeadReq } from "@/models/auth.model";
 import { useCreateLeadMutation } from "@/store/services/auth";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Lead = () => {
@@ -45,7 +46,22 @@ const Lead = () => {
   return (
     <AuthLayout>
       <div className="h-full ">
+        <div className="flex flex-col items-center text-center pb-12">
+          <div className="mb-2 text-lg flex items-center">
+            <div className="font-yekanBold">09910426174</div>
+            <Link
+              to={{ pathname: pageNames.lead }}
+              className="text-primary-200 mx-4 text-base"
+            >
+              ویرایش شماره
+            </Link>
+          </div>
+          <p className="text-sm">
+            کد یکبار مصرفی که از طریق پیامک دریافت .کرده‌اید را وارد نمایید{" "}
+          </p>
+        </div>
         <form onSubmit={formik.handleSubmit}>
+          <div className="mb-2">کد تایید</div>
           <OtpInput
             value={formik.values.verificationCode}
             onChange={handleChangeOtp}
@@ -54,14 +70,18 @@ const Lead = () => {
             otpType="number"
             disabled={false}
           />
-          <ResendOtp
-            onResendClick={() => console.log("resend")}
-            onTimerComplete={() => console.log("completed")}
-            maxTime={120}
-          />
-          <IButton className="bg-primary-200 text-white" type="submit">
-            ادامه
-          </IButton>
+          <div className="mt-3 text-sm">
+            <ResendOtp
+              onResendClick={() => console.log("resend")}
+              onTimerComplete={() => console.log("completed")}
+              maxTime={120}
+            />
+          </div>
+          <div className="mt-8">
+            <IButton className="bg-primary-200 text-white" type="submit">
+              ادامه
+            </IButton>
+          </div>
         </form>
       </div>
     </AuthLayout>

@@ -6,7 +6,7 @@ type Props = { children: JSX.Element };
 const AuthLayout = (props: Props) => {
   return (
     <div className="h-screen bg-gray-100">
-      <div className="h-auto sm:h-full ">
+      <div className="h-auto sm:h-full">
         <div className="container mx-auto py-6 md:py-16 px-6  h-full">
           <div className="flex justify-center items-center flex-wrap h-full">
             <div className="xl:w-9/12 w-full h-full">

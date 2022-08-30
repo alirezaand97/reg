@@ -20,13 +20,14 @@ const ResendOTP = ({
   return (
     <div className={`max-w-full ${className}`}>
       <span className="ml-2">{title}</span>
-      {remainingTime>0 && <span>{convertSecondsToTime(remainingTime)} </span>}
+      {remainingTime > 0 && <span>{convertSecondsToTime(remainingTime)} </span>}
 
       {remainingTime == 0 && (
         <button
           disabled={remainingTime !== 0}
           onClick={handelResendClick}
           type="button"
+          className="text-primary-200"
         >
           ارسال مجدد
         </button>

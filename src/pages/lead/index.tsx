@@ -37,11 +37,17 @@ const Lead = () => {
 
   return (
     <AuthLayout>
-      <div className="h-full ">
-        <div className="flex flex-col items-center pb-12">
-          <div className="mb-8"><Logo className="w-48"/></div>
-          <h1 className="mb-2 text-xl font-yekanBold">ثبت نام در سامانه آگاه اکسپرس</h1>
-          <p className="text-sm text-center">برای استفاده از خدمات آگاه، حساب کاربری خود را ایجاد کنید</p>
+      <div className="h-full">
+        <div className="flex flex-col items-center text-center pb-12">
+          <div className="mb-8">
+            <Logo className="w-48" />
+          </div>
+          <h1 className="mb-2 text-xl font-yekanBold">
+            ثبت نام در سامانه آگاه اکسپرس
+          </h1>
+          <p className="text-sm">
+            برای استفاده از خدمات آگاه، حساب کاربری خود را ایجاد کنید
+          </p>
         </div>
         <Formik
           initialValues={{
@@ -65,7 +71,6 @@ const Lead = () => {
                   value={values.phone}
                   onBlur={handleBlur}
                   touched={touched.phone}
-                  className="text-left"
                 />
               </div>
               <div className="mt-5">

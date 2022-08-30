@@ -17,12 +17,15 @@ const IInput = forwardRef(
     const [showPassword, setShowPassword] = useState<boolean>(false);
     return (
       <div className={`max-w-full w-full`}>
-        <label
-          htmlFor={props.id || props.name}
-          className="text-sm mb-2 inline-block"
-        >
-          {label}
-        </label>
+        {label && (
+          <label
+            htmlFor={props.id || props.name}
+            className="text-sm mb-2 inline-block"
+          >
+            {label}
+          </label>
+        )}
+
         <div className="relative w-full h-12">
           <input
             {...props}
