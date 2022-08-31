@@ -13,6 +13,7 @@ interface Props {
   otpType: string;
   value?: string | number;
   placeholder?: string[];
+  error?: string;
 }
 
 const OtpInput = ({
@@ -26,6 +27,7 @@ const OtpInput = ({
   className,
   inputClassName,
   placeholder,
+  error,
 }: Props) => {
   const {
     activeInput,
@@ -49,24 +51,24 @@ const OtpInput = ({
 
     for (let index = 0; index < OTPLength; index++) {
       inputs.push(
-          <PinItem
-            className={inputClassName}
-            key={index}
-            focus={activeInput === index}
-            value={otp[index]}
-            onChange={handleOnChange}
-            onKeyDown={handleOnKeyDown}
-            onInput={handelOnInput}
-            onPaste={handleOnPaste}
-            onInputFocus={onInputFocus}
-            index={index}
-            disabled={disabled}
-            autoFocus={autoFocus}
-            secure={secure}
-            data-testid="input"
-            otpType={otpType}
-            placeholder={placeholder && placeholder[index]}
-          />
+        <PinItem
+          className={inputClassName}
+          key={index}
+          focus={activeInput === index}
+          value={otp[index]}
+          onChange={handleOnChange}
+          onKeyDown={handleOnKeyDown}
+          onInput={handelOnInput}
+          onPaste={handleOnPaste}
+          onInputFocus={onInputFocus}
+          index={index}
+          disabled={disabled}
+          autoFocus={autoFocus}
+          secure={secure}
+          data-testid="input"
+          otpType={otpType}
+          placeholder={placeholder && placeholder[index]}
+        />
       );
     }
 
@@ -89,10 +91,13 @@ const OtpInput = ({
   ]);
 
   return (
-    <div
-      className={`flex flex-row-reverse max-w-full justify-between ${className}`}
-    >
-      {renderInputs}
+    <div>
+      <div
+        className={`flex flex-row-reverse max-w-full justify-between ${className}`}
+      >
+        {renderInputs}
+      </div>
+      <div className="i-error-text">{error}</div>
     </div>
   );
 };

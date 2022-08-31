@@ -57,7 +57,7 @@ const IInput = forwardRef(
           )}
         </div>
         {error && touched ? (
-          <span className="block w-full text-sm text-red-500 mt-2">
+          <span className="i-error-text">
             {error}
           </span>
         ) : null}

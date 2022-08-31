@@ -19,6 +19,27 @@ const Lead = () => {
 
   const [requestLead, { data, error, isLoading }] = useRequestLeadMutation();
 
+  const createLeadSchema = Yup.object().shape({
+    phone: Yup.string()
+      .label("phone")
+      .matches(
+        mobileRegex,
+        t("messages.incorrectFormat", { field: t("general.mobile") })
+      )
+      .required(t("messages.required", { field: t("general.mobile") })),
+    userCaptchaCode: Yup.string()
+      .label("userCaptchaCode")
+      .required(t("messages.required", { field: t("general.captchaCode") }))
+      .test(
+        "userCaptchaCode",
+        t("messages.fixLength", {
+          field: t("general.captchaCode"),
+          length: 5,
+        }),
+        (val) => val?.length === 5
+      ),
+  });
+
   const handleRequestLead = async (values: RequestLeadReq) => {
     try {
       await requestLead(values).unwrap();
@@ -32,27 +53,6 @@ const Lead = () => {
       console.log("request lead error:", e);
     }
   };
-
-  const createLeadSchema = Yup.object().shape({
-    phone: Yup.string()
-      .label("phone")
-      .matches(
-        mobileRegex,
-        t("messages.incorrectFormat", { field: t("general.mobile") })
-      )
-      .required(t("messages.required", { field: t("general.mobile") })),
-    userCaptchaCode: Yup.string()
-      .label("userCaptchaCode")
-      .test(
-        "userCaptchaCode",
-        t("messages.fixLength", {
-          field: t("general.captchaCode"),
-          length: 5,
-        }),
-        (val) => val?.length === 5
-      )
-      .required(t("messages.required", { field: t("general.captchaCode") })),
-  });
 
   return (
     <AuthLayout>

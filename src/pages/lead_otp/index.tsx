@@ -15,7 +15,7 @@ const Lead = () => {
   const { t } = useI18Next();
   const { search } = useLocation();
   const { phone } = parse(search);
-  const [createLead, { data }] = useCreateLeadMutation();
+  const [createLead, { data, error }] = useCreateLeadMutation();
   const formik = useFormik({
     initialValues: {
       verificationCode: "",
@@ -33,7 +33,7 @@ const Lead = () => {
       .test(
         "verificationCode",
         t("messages.fixLength", {
-          field: t("general.verificationCode"),
+          field: t("general.otpCode"),
           length: 5,
         }),
         (val) => val?.length === 5
@@ -43,12 +43,14 @@ const Lead = () => {
   const handleCreateLead = async (
     values: Pick<CreateLeadReq, "verificationCode">
   ) => {
-    const isValidOtp = await createLeadSchema.isValid(values);
-    if (isValidOtp) {
+    try {
+      await createLeadSchema.validate(values);
       await createLead({
-        phone: "",
+        phone: phone as string,
         verificationCode: values.verificationCode,
       }).unwrap();
+    } catch (e: any) {
+      formik.setFieldError("verificationCode", e?.message);
     }
   };
 
@@ -80,6 +82,7 @@ const Lead = () => {
             OTPLength={5}
             otpType="number"
             disabled={false}
+            error={formik.errors.verificationCode}
           />
           <div className="mt-3 text-sm">
             <ResendOtp
