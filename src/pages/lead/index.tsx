@@ -5,6 +5,7 @@ import Logo from "@/components/icons/Logo";
 import { AuthLayout } from "@/components/layouts";
 import { pageNames } from "@/constant";
 import { mobileRegex } from "@/constant/regex_format";
+import { useI18Next } from "@/i18n";
 import { RequestLeadReq } from "@/models/auth.model";
 import { useRequestLeadMutation } from "@/store/services/auth";
 import { Form, Formik } from "formik";
@@ -14,6 +15,7 @@ import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
+  const { t } = useI18Next();
 
   const [requestLead, { data, error, isLoading }] = useRequestLeadMutation();
 
@@ -33,14 +35,23 @@ const Lead = () => {
 
   const createLeadSchema = Yup.object().shape({
     phone: Yup.string()
-      .label("mobileNumber")
-      .matches(mobileRegex, "فرمت شماره همراه اشتباه است")
-      .required("شماره همراه ضروری است"),
+      .label("phone")
+      .matches(
+        mobileRegex,
+        t("messages.incorrectFormat", { field: t("general.mobile") })
+      )
+      .required(t("messages.required", { field: t("general.mobile") })),
     userCaptchaCode: Yup.string()
-      .label("username")
-      .min(5)
-      .max(5)
-      .required("کد امنیتی را وارد کنید"),
+      .label("userCaptchaCode")
+      .test(
+        "userCaptchaCode",
+        t("messages.fixLength", {
+          field: t("general.captchaCode"),
+          length: 5,
+        }),
+        (val) => val?.length === 5
+      )
+      .required(t("messages.required", { field: t("general.captchaCode") })),
   });
 
   return (
@@ -50,12 +61,8 @@ const Lead = () => {
           <div className="mb-8">
             <Logo className="w-48" />
           </div>
-          <h1 className="mb-2 text-xl font-yekanBold">
-            ثبت نام در سامانه آگاه اکسپرس
-          </h1>
-          <p className="text-sm">
-            برای استفاده از خدمات آگاه، حساب کاربری خود را ایجاد کنید
-          </p>
+          <h1 className="mb-2 text-xl font-yekanBold">{t("general.signUp")}</h1>
+          <p className="text-sm">{t("messages.signUpSlug")}</p>
         </div>
         <Formik
           initialValues={{
@@ -72,8 +79,8 @@ const Lead = () => {
                 <IInput
                   type="text"
                   name="phone"
-                  placeholder="مثلا 09110000000"
-                  label="شماره همراه"
+                  placeholder={t("general.mobilePlaceholdere")}
+                  label={t("general.mobile")}
                   onChange={handleChange}
                   error={errors.phone}
                   value={values.phone}
@@ -85,8 +92,10 @@ const Lead = () => {
                 <IInput
                   type="text"
                   name="userCaptchaCode"
-                  placeholder="کد را وارد کنید"
-                  label="کد امنیتی"
+                  placeholder={t("messages.required", {
+                    field: t("general.captchaCode"),
+                  })}
+                  label={t("general.captchaCode")}
                   onChange={handleChange}
                   error={errors.userCaptchaCode}
                   value={values.userCaptchaCode}
@@ -103,11 +112,12 @@ const Lead = () => {
                   type="submit"
                   disabled={isLoading}
                 >
-                  ثبت نام
+                  {t("general.submit")}
                 </IButton>
               </div>
               <div className="mt-2 text-primary-200 text-sm">
-                قبلاً ثبت نام کرده‌اید؟ وارد شوید
+                <span>{t("messages.alreadySignup")} </span>
+                <span> {t("general.enter")}</span>
               </div>
             </Form>
           )}

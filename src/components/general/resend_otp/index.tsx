@@ -16,7 +16,6 @@ const ResendOTP = ({
   ...props
 }: Props) => {
   const { remainingTime, handelResendClick } = useResendOTP(props);
-
   return (
     <div className={`max-w-full ${className}`}>
       <span className="ml-2">{title}</span>

@@ -1,6 +1,6 @@
 {
-  "login": "ورود",
   "signUp": "ثبت نام در سامانه آگاه اکسپرس  ",
+  "login": "ورود",
   "mobile": "شماره همراه",
   "mobilePlaceholdere": " مثلا 09120000000",
   "submit": "ثبت نام",
@@ -9,9 +9,7 @@
   "logOut": "خروج",
   "firstName": "نام",
   "lastName": "نام خانوادگی",
-  "source": "منبع",
-  "bank": "بانک",
-  "bankAccountNumber": "شماره حساب بانکی",
   "continue": "ادامه",
-  "remainingTime": "زمان باقی مانده"
+  "remainingTime": "زمان باقی مانده",
+  "enter":"وارد شوید"
 }

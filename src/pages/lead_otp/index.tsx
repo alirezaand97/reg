@@ -9,8 +9,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { parse } from "query-string";
 import getResendOtpTime from "@/utils/get_resend_otp_time";
+import { useI18Next } from "@/i18n";
 
 const Lead = () => {
+  const { t } = useI18Next();
   const { search } = useLocation();
   const { phone } = parse(search);
   const [createLead, { data }] = useCreateLeadMutation();
@@ -27,8 +29,15 @@ const Lead = () => {
   const createLeadSchema = Yup.object().shape({
     verificationCode: Yup.string()
       .label("verificationCode")
-      .required("کد تایید را وارد کنید")
-      .min(5),
+      .required(t("messages.required", { field: t("general.otpCode") }))
+      .test(
+        "verificationCode",
+        t("messages.fixLength", {
+          field: t("general.verificationCode"),
+          length: 5,
+        }),
+        (val) => val?.length === 5
+      ),
   });
 
   const handleCreateLead = async (
@@ -57,15 +66,13 @@ const Lead = () => {
               to={{ pathname: pageNames.lead }}
               className="text-primary-200 mx-4 text-base"
             >
-              ویرایش شماره
+              {t("messages.editField", { field: t("general.mobile") })}
             </Link>
           </div>
-          <p className="text-sm">
-            کد یکبار مصرفی که از طریق پیامک دریافت .کرده‌اید را وارد نمایید{" "}
-          </p>
+          <p className="text-sm">{t("messages.enterOtpCde")}</p>
         </div>
         <form onSubmit={formik.handleSubmit}>
-          <div className="mb-2">کد تایید</div>
+          <div className="mb-2"> {t("general.otpCode")}</div>
           <OtpInput
             value={formik.values.verificationCode}
             onChange={handleChangeOtp}
@@ -76,16 +83,17 @@ const Lead = () => {
           />
           <div className="mt-3 text-sm">
             <ResendOtp
+              title={t("general.remainingTime")}
               onResendClick={() => console.log("resend")}
               onTimerComplete={() => console.log("completed")}
               maxTime={getResendOtpTime(
-                "Wednesday, August 31, 2022 9:25:32 AM GMT+04:30"
+                "Wednesday, August 31, 2022 11:25:32 AM GMT+04:30"
               )}
             />
           </div>
           <div className="mt-8">
             <IButton className="bg-primary-200 text-white" type="submit">
-              ادامه
+              {t("general.continue")}
             </IButton>
           </div>
         </form>

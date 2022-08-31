@@ -1,6 +1,6 @@
 {
-  "login": "login",
   "signUp": "Register in Agah Express system  ",
+  "login": "login",
   "mobile": "phone",
   "mobilePlaceholdere": " for example 09120000000",
   "submit": "submit",
@@ -10,5 +10,7 @@
   "firstName": "Fristname",
   "lastName": "Lastname ",
   "continue": "continue",
-  "remainingTime": "remaining time"
+  "remainingTime": "remaining time",
+  "enter":"Sign up"
+
 }

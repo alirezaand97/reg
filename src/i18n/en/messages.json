@@ -1,12 +1,15 @@
 {
   "codeSent": "Code sent successfully",
-  "required": "Enter the {{fieldName}} ",
+  "required": "Enter the {{field}} ",
   "requireMessage": "This field is required",
   "minLengthError": "The {{field}} must be at least {{min}}  characters long ",
+  "maxLengthError": "The {{field}} must be at most {{max}}  characters long ",
   "incorrectFormat": "Enter the {{field}} in the correct format",
   "incorrectValue": " {{field}} is incorrect",
   "signUpSlug": "Create your account to use Agah services ",
   "useAlreadyExist": "Your mobile number is registered in the system. You can log in with your username and password    ",
   "enterOtpCde": "Enter the OTP you received via SMS",
-  "editField": "Edit {{field}}"
+  "editField": "Edit {{field}}",
+  "alreadySignup": "already exist"
+
 }
