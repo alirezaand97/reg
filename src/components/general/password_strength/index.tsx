@@ -50,10 +50,10 @@ const PasswordStrength = (props: Props) => {
   };
   if (!show) return null;
   return (
-    <div>
+    <div className="mt-1">
       {!isValid
-        ? Object.values(passwordChecklist).map((item) => (
-            <div className="text-xs">
+        ? Object.values(passwordChecklist).map((item,index) => (
+            <div className="text-xs" key={index}>
               {
                 <div
                   className={`${

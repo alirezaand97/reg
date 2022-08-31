@@ -139,7 +139,10 @@ const Lead = () => {
                   onChange={handleChange}
                   error={errors.password}
                   value={values.password}
-                  onBlur={handleBlur}
+                  onBlur={(e) => {
+                    handleBlur(e);
+                    setShowPassChecklist(false);
+                  }}
                   touched={touched.password}
                   onFocus={() => setShowPassChecklist(true)}
                 />
