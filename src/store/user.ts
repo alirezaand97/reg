@@ -1,7 +1,7 @@
 import { UserInterface } from "@/models/user.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: UserInterface = { phone: "", token: "" };
+const initialState: UserInterface = {};
 const user = createSlice({
   initialState,
   name: "user",

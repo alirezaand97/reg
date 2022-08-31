@@ -7,6 +7,8 @@ import { pageNames } from "@/constant";
 import { mobileRegex } from "@/constant/regex_format";
 import { useI18Next } from "@/i18n";
 import { RequestLeadReq } from "@/models/auth.model";
+import { useAppDispatch } from "@/store";
+import { setOtp } from "@/store/auth";
 import { useRequestLeadMutation } from "@/store/services/auth";
 import { Form, Formik } from "formik";
 import { stringifyUrl } from "query-string";
@@ -16,8 +18,9 @@ import * as Yup from "yup";
 const Lead = () => {
   let navigate = useNavigate();
   const { t } = useI18Next();
-
-  const [requestLead, { data, error, isLoading }] = useRequestLeadMutation();
+  const dispatch = useAppDispatch();
+  const [requestLead, { data: requestLeadData, error, isLoading }] =
+    useRequestLeadMutation();
 
   const createLeadSchema = Yup.object().shape({
     phone: Yup.string()
@@ -43,6 +46,14 @@ const Lead = () => {
   const handleRequestLead = async (values: RequestLeadReq) => {
     try {
       await requestLead(values).unwrap();
+      if (requestLeadData) {
+        dispatch(
+          setOtp({
+            expireDate: requestLeadData.expireDate,
+            codeLength: requestLeadData.codeLength,
+          })
+        );
+      }
       navigate(
         stringifyUrl({
           url: pageNames.lead_otp,
