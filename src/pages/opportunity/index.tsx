@@ -1,4 +1,5 @@
 import { IButton, IInput } from "@/components/general";
+import PasswordStrength from "@/components/general/password_strength";
 import { AuthLayout } from "@/components/layouts";
 import { pageNames } from "@/constant";
 import { passwordRegex, persianRegex } from "@/constant/regex_format";
@@ -8,12 +9,14 @@ import { useAppDispatch } from "@/store";
 import { useCreateOpportunityMutation } from "@/store/services/auth";
 import checkNationalCode from "@/utils/check_national_code";
 import { Form, Formik } from "formik";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const Lead = () => {
   let navigate = useNavigate();
   const { t } = useI18Next();
+  const [showPassChecklist, setShowPassChecklist] = useState(false);
   const [createOpportunity, { isLoading }] = useCreateOpportunityMutation();
   const createOpportunitySchema = Yup.object().shape({
     nationalCode: Yup.string()
@@ -138,6 +141,11 @@ const Lead = () => {
                   value={values.password}
                   onBlur={handleBlur}
                   touched={touched.password}
+                  onFocus={() => setShowPassChecklist(true)}
+                />
+                <PasswordStrength
+                  password={values.password}
+                  show={showPassChecklist}
                 />
               </div>
               <div className="mt-5">

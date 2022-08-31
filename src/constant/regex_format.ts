@@ -1,8 +1,9 @@
 export const mobileRegex = /^(\+98|0|98)9\d{9}$/;
-export const underCasePassRegex = /(?=.*[a-z])/;
-export const upperCasePassRegex = /(?=.*[A-Z])/;
-export const numberPasswordRegex = /(?=.*?[0-9])/;
-export const specialCharPassRegex = /(?=.*?[#?!@$%^&*-])/;
+export const lowerCaseRegex = /(?=.*[a-z])/;
+export const upperCaseRegex = /(?=.*[A-Z])/;
+export const numberRegex = /(?=.*?[0-9])/;
+export const specialCharRegex = /(?=.*?[#?!@$%^&*-])/;
 export const passwordRegex =
-  /^(?=.*[A-Z])(?=.*[\W])(?=.*[0-9])(?=.*[a-z]).{8,}$/g;
+  /^(?=.*[A-Z])(?=.*[\W])(?=.*[0-9])(?=.*[a-z]).{8,20}$/g;
 export const persianRegex = /^[\u0600-\u06FF\s]+$/;
+export const englishChar = /(?=.*[a-zA-Z0-9])/;
