@@ -1,12 +1,12 @@
-import { UserInterface } from "@/models/user.model";
+import { UserModel } from "@/models/user.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initialState: UserInterface = {};
+const initialState: UserModel = {};
 const user = createSlice({
   initialState,
   name: "user",
   reducers: {
-    setUser: (state, action: PayloadAction<UserInterface>) => {
+    setUser: (state, action: PayloadAction<UserModel>) => {
       return action.payload;
     },
   },

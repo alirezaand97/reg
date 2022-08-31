@@ -5,3 +5,4 @@ export const numberPasswordRegex = /(?=.*?[0-9])/;
 export const specialCharPassRegex = /(?=.*?[#?!@$%^&*-])/;
 export const passwordRegex =
   /^(?=.*[A-Z])(?=.*[\W])(?=.*[0-9])(?=.*[a-z]).{8,}$/g;
+export const persianRegex = /^[\u0600-\u06FF\s]+$/;

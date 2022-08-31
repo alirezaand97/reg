@@ -6,7 +6,7 @@ import { AuthLayout } from "@/components/layouts";
 import { pageNames } from "@/constant";
 import { mobileRegex } from "@/constant/regex_format";
 import { useI18Next } from "@/i18n";
-import { RequestLeadReq } from "@/models/auth.model";
+import { RequestLeadReqModel } from "@/models/auth.model";
 import { useAppDispatch } from "@/store";
 import { setOtp } from "@/store/auth";
 import { useRequestLeadMutation } from "@/store/services/auth";
@@ -43,7 +43,7 @@ const Lead = () => {
       ),
   });
 
-  const handleRequestLead = async (values: RequestLeadReq) => {
+  const handleRequestLead = async (values: RequestLeadReqModel) => {
     try {
       await requestLead(values).unwrap();
       if (requestLeadData) {
@@ -72,7 +72,7 @@ const Lead = () => {
           <div className="mb-8">
             <Logo className="w-48" />
           </div>
-          <h1 className="mb-2 text-xl font-yekanBold">{t("general.signUp")}</h1>
+          <h1 className="mb-2 text-xl font-yekanBold">{t("general.register")}</h1>
           <p className="text-sm">{t("messages.signUpSlug")}</p>
         </div>
         <Formik
@@ -127,7 +127,7 @@ const Lead = () => {
                 </IButton>
               </div>
               <div className="mt-2 text-primary-200 text-sm">
-                <span>{t("messages.alreadySignup")} </span>
+                <span>{t("messages.alreadyRegister")} </span>
                 <span> {t("general.enter")}</span>
               </div>
             </Form>

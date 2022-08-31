@@ -10,6 +10,7 @@
   "useAlreadyExist": "Your mobile number is registered in the system. You can log in with your username and password    ",
   "enterOtpCde": "Enter the OTP you received via SMS",
   "editField": "Edit {{field}}",
-  "alreadySignup": "already exist"
+  "alreadyRegister": "already exist",
+  "passwordConfirmError":"password not match"
 
 }

@@ -1,5 +1,5 @@
 {
-  "signUp": "ثبت نام در سامانه آگاه اکسپرس  ",
+  "register": "ثبت نام در سامانه آگاه اکسپرس  ",
   "login": "ورود",
   "mobile": "شماره همراه",
   "mobilePlaceholdere": " مثلا 09120000000",
@@ -11,5 +11,11 @@
   "lastName": "نام خانوادگی",
   "continue": "ادامه",
   "remainingTime": "زمان باقی مانده",
-  "enter":"وارد شوید"
+  "enter": "وارد شوید",
+  "completeRegister": "تکمیل ثبت نام",
+  "completeInformation": "تکمیل  اطلاعات",
+  "nationalCode": "کد ملی",
+  "password": "کلمه عبور",
+  "passwordConfirm": "تکرار کلمه عبور"
+
 }

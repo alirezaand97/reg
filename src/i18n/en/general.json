@@ -1,5 +1,5 @@
 {
-  "signUp": "Register in Agah Express system  ",
+  "register": "Register in Agah Express system  ",
   "login": "login",
   "mobile": "phone",
   "mobilePlaceholdere": " for example 09120000000",
@@ -11,6 +11,10 @@
   "lastName": "Lastname ",
   "continue": "continue",
   "remainingTime": "remaining time",
-  "enter":"Sign up"
-
+  "enter": "Sign up",
+  "completeRegister": "Complete registration",
+  "completeInformation": "complete information",
+  "nationalCode": "national code",
+  "password": "password",
+  "confirmPassword": "confirm password"
 }

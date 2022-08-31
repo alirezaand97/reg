@@ -1,19 +1,20 @@
 import {
-  Captcha,
-  CreateLeadReq,
-  CreateLeadRes,
-  RequestLeadReq,
-  RequestLeadRes,
+  CaptchaModel,
+  CreateLeadReqModel,
+  CreateLeadResModel,
+  CreateOpportunityReqModel,
+  RequestLeadReqModel,
+  RequestLeadResModel,
 } from "@/models/auth.model";
 import service from "./index";
 
 export const auth = service.injectEndpoints({
   endpoints: (build) => ({
-    generateCaptcha: build.query<Captcha, void>({
+    generateCaptcha: build.query<CaptchaModel, void>({
       query: () => "GenerateCaptcha",
       providesTags: ["auth"],
     }),
-    requestLead: build.mutation<RequestLeadRes, RequestLeadReq>({
+    requestLead: build.mutation<RequestLeadResModel, RequestLeadReqModel>({
       query: (params) => ({
         url: "RequestLead",
         method: "POST",
@@ -21,9 +22,16 @@ export const auth = service.injectEndpoints({
       }),
       invalidatesTags: ["auth"],
     }),
-    createLead: build.mutation<CreateLeadRes, CreateLeadReq>({
+    createLead: build.mutation<CreateLeadResModel, CreateLeadReqModel>({
       query: (params) => ({
         url: "CreateLead",
+        method: "POST",
+        body: params,
+      }),
+    }),
+    createOpportunity: build.mutation<void, CreateOpportunityReqModel>({
+      query: (params) => ({
+        url: "CreateOpportunity",
         method: "POST",
         body: params,
       }),
@@ -36,4 +44,5 @@ export const {
   useGenerateCaptchaQuery,
   useRequestLeadMutation,
   useCreateLeadMutation,
+  useCreateOpportunityMutation,
 } = auth;

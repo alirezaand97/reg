@@ -1,8 +1,8 @@
-import { RequestLeadRes } from "@/models/auth.model";
+import { RequestLeadResModel } from "@/models/auth.model";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface AuthInterface {
-  otp?: RequestLeadRes;
+  otp?: RequestLeadResModel;
 }
 
 const initialState: AuthInterface = {};
@@ -10,7 +10,7 @@ const auth = createSlice({
   initialState,
   name: "auth",
   reducers: {
-    setOtp: (state, action: PayloadAction<RequestLeadRes>) => {
+    setOtp: (state, action: PayloadAction<RequestLeadResModel>) => {
       state.otp = action.payload;
     },
   },

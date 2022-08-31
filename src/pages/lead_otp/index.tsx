@@ -3,7 +3,7 @@ import OtpInput from "@/components/general/otp_Input";
 import { AuthLayout } from "@/components/layouts";
 import { pageNames } from "@/constant";
 import { useI18Next } from "@/i18n";
-import { CreateLeadReq } from "@/models/auth.model";
+import { CreateLeadReqModel } from "@/models/auth.model";
 import { useAppDispatch, useAppSelector } from "@/store";
 import { useCreateLeadMutation } from "@/store/services/auth";
 import { setUser } from "@/store/user";
@@ -45,7 +45,7 @@ const Lead = () => {
   });
 
   const handleCreateLead = async (
-    values: Pick<CreateLeadReq, "verificationCode">
+    values: Pick<CreateLeadReqModel, "verificationCode">
   ) => {
     try {
       await createLeadSchema.validate(values);
