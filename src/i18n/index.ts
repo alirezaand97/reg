@@ -1,16 +1,15 @@
 import i18n from "i18next";
 import { initReactI18next, useTranslation } from "react-i18next";
 import en from "./en";
+import fa from "./fa";
 
-//empty for now
-const resources = { en: { translation: en } };
+const resources = { en: { translation: en }, fa: { translation: fa } };
 
 i18n.use(initReactI18next).init({
   resources,
-  //language to use if translations in user language are not available
-  fallbackLng: "en",
+  fallbackLng: "fa",
   interpolation: {
-    escapeValue: false, // not needed for react!!
+    escapeValue: false, 
   },
 });
 

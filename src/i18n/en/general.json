@@ -1,3 +1,14 @@
 {
-  "home": "Home"
+  "login": "login",
+  "signUp": "Register in Agah Express system  ",
+  "mobile": "phone",
+  "mobilePlaceholdere": " for example 09120000000",
+  "submit": "submit",
+  "otpCode": "otp code",
+  "captchaCode": "Security code",
+  "logOut": "Logout",
+  "firstName": "Fristname",
+  "lastName": "Lastname ",
+  "continue": "continue",
+  "remainingTime": "remaining time"
 }

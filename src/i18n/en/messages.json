@@ -1,1 +1,12 @@
-{}
+{
+  "codeSent": "Code sent successfully",
+  "required": "Enter the {{fieldName}} ",
+  "requireMessage": "This field is required",
+  "minLengthError": "The {{field}} must be at least {{min}}  characters long ",
+  "incorrectFormat": "Enter the {{field}} in the correct format",
+  "incorrectValue": " {{field}} is incorrect",
+  "signUpSlug": "Create your account to use Agah services ",
+  "useAlreadyExist": "Your mobile number is registered in the system. You can log in with your username and password    ",
+  "enterOtpCde": "Enter the OTP you received via SMS",
+  "editField": "Edit {{field}}"
+}

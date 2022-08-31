@@ -27,7 +27,8 @@ const Lead = () => {
   const createLeadSchema = Yup.object().shape({
     verificationCode: Yup.string()
       .label("verificationCode")
-      .required("کد تایید را وارد کنید"),
+      .required("کد تایید را وارد کنید")
+      .min(5),
   });
 
   const handleCreateLead = async (
@@ -77,7 +78,9 @@ const Lead = () => {
             <ResendOtp
               onResendClick={() => console.log("resend")}
               onTimerComplete={() => console.log("completed")}
-              maxTime={getResendOtpTime('Wednesday, August 31, 2022 9:14:32 AM GMT+04:30')}
+              maxTime={getResendOtpTime(
+                "Wednesday, August 31, 2022 9:25:32 AM GMT+04:30"
+              )}
             />
           </div>
           <div className="mt-8">
