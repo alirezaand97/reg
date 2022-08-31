@@ -8,6 +8,7 @@ import { useFormik } from "formik";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { parse } from "query-string";
+import getResendOtpTime from "@/utils/get_resend_otp_time";
 
 const Lead = () => {
   const { search } = useLocation();
@@ -76,7 +77,7 @@ const Lead = () => {
             <ResendOtp
               onResendClick={() => console.log("resend")}
               onTimerComplete={() => console.log("completed")}
-              maxTime={120}
+              maxTime={getResendOtpTime('Wednesday, August 31, 2022 9:14:32 AM GMT+04:30')}
             />
           </div>
           <div className="mt-8">
