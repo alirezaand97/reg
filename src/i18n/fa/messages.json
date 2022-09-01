@@ -12,6 +12,6 @@
   "enterOtpCde": "کد یکبار مصرفی که از طریق پیامک دریافت .کرده‌اید را وارد نمایید  ",
   "editField": "ویرایش {{field}}",
   "alreadyRegister": "قبلا ثبت نام کرده اید",
-  "passwordConfirmError": "تکرار کلمه عبور مطابقت ندارد",
+  "passwordConfirmError": " کلمه عبور و تکرار آن مطابقت ندارند",
   "justPersianChar": "{{field}} باید فقط شامل حروف فارسی باشد"
 }
