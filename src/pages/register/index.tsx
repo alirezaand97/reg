@@ -15,7 +15,7 @@ import { stringifyUrl } from "query-string";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-const Lead = () => {
+const Register = () => {
   let navigate = useNavigate();
   const { t } = useI18Next();
   const dispatch = useAppDispatch();
@@ -56,7 +56,7 @@ const Lead = () => {
       }
       navigate(
         stringifyUrl({
-          url: pageNames.lead_otp,
+          url: pageNames.register_verify,
           query: { phone: values.phone },
         })
       );
@@ -72,7 +72,9 @@ const Lead = () => {
           <div className="mb-8">
             <Logo className="w-48" />
           </div>
-          <h1 className="mb-2 text-xl font-yekanBold">{t("general.register")}</h1>
+          <h1 className="mb-2 text-xl font-yekanBold">
+            {t("general.register")}
+          </h1>
           <p className="text-sm">{t("messages.signUpSlug")}</p>
         </div>
         <Formik
@@ -138,4 +140,4 @@ const Lead = () => {
   );
 };
 
-export default Lead;
+export default Register;

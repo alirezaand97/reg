@@ -30,6 +30,7 @@ const ISelect = ({ selected, onChange, items, className }: Props) => {
         );
 
   const handleChange = (value: any) => {
+    console.log(value);
     setSelectedOption(value);
     onChange(value);
   };

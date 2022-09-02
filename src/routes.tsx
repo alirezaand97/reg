@@ -3,15 +3,19 @@ import { Lead, LeadOtp, Opprtunity } from "./pages";
 
 const routes: { path: string; element: JSX.Element }[] = [
   {
-    path: pageNames.lead,
+    path: pageNames.register,
     element: <Lead />,
   },
   {
-    path: pageNames.lead_otp,
+    path: pageNames.register_verify,
     element: <LeadOtp />,
   },
   {
     path: pageNames.opportunity,
+    element: <Opprtunity />,
+  },
+  {
+    path: pageNames.register_success,
     element: <Opprtunity />,
   },
 ];

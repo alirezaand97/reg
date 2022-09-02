@@ -63,7 +63,7 @@ const Lead = () => {
   }: CreateOpportunityReqModel) => {
     try {
       await createOpportunity(params).unwrap();
-      navigate("/");
+      navigate(pageNames.register_success);
     } catch (error) {
       console.log("createOpportunity", error);
     }

@@ -10,14 +10,15 @@ import { setUser } from "@/store/user";
 import getResendOtpTime from "@/utils/get_resend_otp_time";
 import { useFormik } from "formik";
 import { parse } from "query-string";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
-const Lead = () => {
+const RegisterVerify = () => {
   const dispatch = useAppDispatch();
   const { t } = useI18Next();
   const { search } = useLocation();
   const { phone } = parse(search);
+  const navigate = useNavigate();
   const otpState = useAppSelector((state) => state.auth.otp);
   const [createLead, { data: createLeadData, error }] = useCreateLeadMutation();
   const formik = useFormik({
@@ -56,6 +57,7 @@ const Lead = () => {
       dispatch(
         setUser({ token: createLeadData?.token, phone: phone as string })
       );
+      navigate(pageNames.opportunity);
     } catch (e: any) {
       formik.setFieldError("verificationCode", e?.message);
     }
@@ -74,7 +76,7 @@ const Lead = () => {
           <div className="mb-2 text-lg flex items-center">
             <div className="font-yekanBold">{phone}</div>
             <Link
-              to={{ pathname: pageNames.lead }}
+              to={{ pathname: pageNames.register }}
               className="text-primary-200 mx-4 text-base"
             >
               {t("messages.editField", { field: t("general.mobile") })}
@@ -112,4 +114,4 @@ const Lead = () => {
   );
 };
 
-export default Lead;
+export default RegisterVerify;
