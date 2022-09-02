@@ -11,6 +11,11 @@
   "enterOtpCde": "Enter the OTP you received via SMS",
   "editField": "Edit {{field}}",
   "alreadyRegister": "already exist",
-  "passwordConfirmError":"password not match"
+  "passwordConfirmError":"password not match",
+  "registerSuccess":"your account was successfully registered",
+  "registerSuccess_message":"",
+  "completeSejam":"complete sejam inforamtion",
+  "loginToProfile":"login to profile"
+  
 
 }

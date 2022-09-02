@@ -13,5 +13,9 @@
   "editField": "ویرایش {{field}}",
   "alreadyRegister": "قبلا ثبت نام کرده اید",
   "passwordConfirmError": " کلمه عبور و تکرار آن مطابقت ندارند",
-  "justPersianChar": "{{field}} باید فقط شامل حروف فارسی باشد"
+  "justPersianChar": "{{field}} باید فقط شامل حروف فارسی باشد",
+  "registerSuccess":"حساب کاربری شما با موفقیت ایجاد شد",
+  "registerSuccessMessage":"لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است",
+  "completeSejam":"تکمیل اطلاعات سجام",
+  "loginToProfile":"ورود به پروفایل"
 }

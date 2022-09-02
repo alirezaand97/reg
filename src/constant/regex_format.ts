@@ -6,4 +6,5 @@ export const specialCharRegex = /(?=.*?[#?!@$%^&*-])/;
 export const passwordRegex =
   /^(?=.*[A-Z])(?=.*[\W])(?=.*[0-9])(?=.*[a-z]).{8,20}$/g;
 export const persianRegex = /^[\u0600-\u06FF\s]+$/;
+export const englishRegex = /^[\u0041-\u007A\s]+$/;
 export const englishChar = /(?=.*[a-zA-Z0-9])/;
