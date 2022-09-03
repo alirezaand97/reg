@@ -1,5 +1,4 @@
 import LEAD from "@/assets/images/lead.jpg";
-import React from "react";
 
 type Props = { children: JSX.Element };
 

@@ -1,6 +1,7 @@
+import React, { InputHTMLAttributes, Ref, forwardRef, useState } from "react";
+
 import NotVisibility from "@/components/icons/NotVisibility";
 import VisibilityIcon from "@/components/icons/VisibilityIcon";
-import React, { forwardRef, InputHTMLAttributes, Ref, useState } from "react";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   label?: string | React.ReactNode;
@@ -20,8 +21,7 @@ const IInput = forwardRef(
         {label && (
           <label
             htmlFor={props.id || props.name}
-            className="text-sm mb-2 inline-block"
-          >
+            className="text-sm mb-2 inline-block">
             {label}
           </label>
         )}
@@ -46,8 +46,7 @@ const IInput = forwardRef(
           {props.type == "password" && (
             <span
               className="absolute left-0 pl-3 top-1/2 -translate-y-1/2 cursor-pointer"
-              onClick={() => setShowPassword(!showPassword)}
-            >
+              onClick={() => setShowPassword(!showPassword)}>
               {showPassword ? (
                 <NotVisibility className="fill-gray-400" />
               ) : (
@@ -56,10 +55,9 @@ const IInput = forwardRef(
             </span>
           )}
         </div>
+        {/* {touched && error ? ( */}
         {error && touched ? (
-          <span className="i-error-text">
-            {error}
-          </span>
+          <span className="i-error-text">{error}</span>
         ) : null}
       </div>
     );

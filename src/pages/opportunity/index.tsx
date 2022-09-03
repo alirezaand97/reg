@@ -1,23 +1,25 @@
-import { IButton, IInput } from "@/components/general";
-import PasswordStrength from "@/components/general/password_strength";
-import { AuthLayout } from "@/components/layouts";
-import { pageNames } from "@/constant";
-import { passwordRegex, persianRegex } from "@/constant/regex_format";
-import { useI18Next } from "@/i18n";
-import { CreateOpportunityReqModel } from "@/models/auth.model";
-import { useAppDispatch } from "@/store";
-import { useCreateOpportunityMutation } from "@/store/services/auth";
-import checkNationalCode from "@/utils/check_national_code";
-import { Form, Formik } from "formik";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+
+import { Form, Formik } from "formik";
+import { IButton, IInput } from "@/components/general";
+import { passwordRegex, persianRegex } from "@/constant/regex_format";
+
+import { AuthLayout } from "@/components/layouts";
+import { CreateOpportunityReqModel } from "@/models/auth.model";
+import PasswordStrength from "@/components/general/password_strength";
+import checkNationalCode from "@/utils/check_national_code";
+import { pageNames } from "@/constant";
+import { useCreateOpportunityMutation } from "@/store/services/auth";
+import { useI18Next } from "@/i18n";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Lead = () => {
   let navigate = useNavigate();
   const { t } = useI18Next();
   const [showPassChecklist, setShowPassChecklist] = useState(false);
   const [createOpportunity, { isLoading }] = useCreateOpportunityMutation();
+
   const createOpportunitySchema = Yup.object().shape({
     nationalCode: Yup.string()
       .label("nationalCode")
@@ -87,8 +89,7 @@ const Lead = () => {
           }}
           validationSchema={createOpportunitySchema}
           enableReinitialize
-          onSubmit={handleCreateOpportunity}
-        >
+          onSubmit={handleCreateOpportunity}>
           {({ handleChange, errors, values, handleBlur, touched }) => (
             <Form>
               <IInput
@@ -166,10 +167,9 @@ const Lead = () => {
               </div>
               <div className="mt-8">
                 <IButton
-                  className="bg-primary-200 text-white"
+                  className="bg-primary-200 text-white  "
                   type="submit"
-                  disabled={isLoading}
-                >
+                  disabled={isLoading}>
                   {t("general.completeInformation")}
                 </IButton>
               </div>

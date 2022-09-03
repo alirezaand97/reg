@@ -1,17 +1,19 @@
-import { IButton, ResendOtp } from "@/components/general";
-import OtpInput from "@/components/general/otp_Input";
-import { AuthLayout } from "@/components/layouts";
-import { pageNames } from "@/constant";
-import { useI18Next } from "@/i18n";
-import { CreateLeadReqModel } from "@/models/auth.model";
-import { useAppDispatch, useAppSelector } from "@/store";
-import { useCreateLeadMutation } from "@/store/services/auth";
-import { setUser } from "@/store/user";
-import getResendOtpTime from "@/utils/get_resend_otp_time";
-import { useFormik } from "formik";
-import { parse } from "query-string";
-import { Link, useLocation, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+
+import { IButton, ResendOtp } from "@/components/general";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/store";
+
+import { AuthLayout } from "@/components/layouts";
+import { CreateLeadReqModel } from "@/models/auth.model";
+import OtpInput from "@/components/general/otp_Input";
+import getResendOtpTime from "@/utils/get_resend_otp_time";
+import { pageNames } from "@/constant";
+import { parse } from "query-string";
+import { setUser } from "@/store/user";
+import { useCreateLeadMutation } from "@/store/services/auth";
+import { useFormik } from "formik";
+import { useI18Next } from "@/i18n";
 
 const RegisterVerify = () => {
   const dispatch = useAppDispatch();
@@ -77,8 +79,7 @@ const RegisterVerify = () => {
             <div className="font-yekanBold">{phone}</div>
             <Link
               to={{ pathname: pageNames.register }}
-              className="text-primary-200 mx-4 text-base"
-            >
+              className="text-primary-200 mx-4 text-base">
               {t("messages.editField", { field: t("general.mobile") })}
             </Link>
           </div>

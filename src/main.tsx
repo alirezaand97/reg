@@ -1,7 +1,8 @@
 import "./assets/css/ReactToastify.min.css";
 import "./assets/css/main.min.css";
-import "./i18n";
 import "./assets/css/yekan.css";
+import "./assets/css/animate.css";
+import "./i18n";
 
 import App from "./App";
 import { PersistGate } from "redux-persist/integration/react";

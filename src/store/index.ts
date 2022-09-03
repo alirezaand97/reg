@@ -1,24 +1,25 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import user from "./user";
-import auth from "./auth";
-import storage from "redux-persist/lib/storage";
 import {
-  persistReducer,
-  persistStore,
   FLUSH,
-  REHYDRATE,
   PAUSE,
   PERSIST,
   PURGE,
   REGISTER,
+  REHYDRATE,
+  persistReducer,
 } from "redux-persist";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { setupListeners } from "@reduxjs/toolkit/query";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
+
+import auth from "./auth";
 import service from "./services";
+import { setupListeners } from "@reduxjs/toolkit/query";
+import storage from "redux-persist/lib/storage";
+import user from "./user";
+
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: [service.reducerPath, user.name,auth.name],
+  blacklist: [service.reducerPath, user.name, auth.name],
 };
 
 const reducers = combineReducers({
