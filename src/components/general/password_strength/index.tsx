@@ -1,20 +1,22 @@
 import {
-  englishChar,
   lowerCaseRegex,
   numberRegex,
   specialCharRegex,
   upperCaseRegex,
 } from "@/constant/regex_format";
-import { Transition } from "@headlessui/react";
 import { useEffect, useState } from "react";
+
+import { Transition } from "@headlessui/react";
 
 interface Props {
   password: string;
   show?: boolean;
 }
+
 const PasswordStrength = (props: Props) => {
   const { password, show } = props;
   const [isValid, setIsValid] = useState(false);
+
   useEffect(() => {
     checkStrength() ? setIsValid(true) : setIsValid(false);
   }, [password]);
@@ -38,9 +40,9 @@ const PasswordStrength = (props: Props) => {
     },
   };
 
-  const checkStrength = () => {
-    return Object.values(passwordChecklist).every((item) => item.isValid);
-  };
+  const checkStrength = () =>
+    Object.values(passwordChecklist).every((item) => item.isValid);
+
   return (
     <Transition
       show={show}
@@ -49,8 +51,7 @@ const PasswordStrength = (props: Props) => {
       enterTo="opacity-100"
       leave="transition-opacity ease-linear duration-300"
       leaveFrom="opacity-100"
-      leaveTo="opacity-0"
-    >
+      leaveTo="opacity-0">
       <div className="mt-1">
         {!isValid
           ? Object.values(passwordChecklist).map((item, index) => (
@@ -59,8 +60,7 @@ const PasswordStrength = (props: Props) => {
                   <div
                     className={`${
                       item.isValid ? "text-teal-500" : "text-red-500"
-                    }`}
-                  >
+                    }`}>
                     {item.message}
                   </div>
                 }

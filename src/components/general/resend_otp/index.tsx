@@ -13,6 +13,7 @@ interface Props {
 const ResendOTP = ({
   className,
   title = "زمان باقی مانده",
+
   ...props
 }: Props) => {
   const { remainingTime, handelResendClick } = useResendOTP(props);
@@ -26,8 +27,7 @@ const ResendOTP = ({
           disabled={remainingTime !== 0}
           onClick={handelResendClick}
           type="button"
-          className="text-primary-200"
-        >
+          className="text-primary-200">
           ارسال مجدد
         </button>
       )}
