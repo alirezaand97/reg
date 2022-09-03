@@ -1,11 +1,9 @@
 import { IButton, IInput } from "@/components/general";
 import PasswordStrength from "@/components/general/password_strength";
 import { AuthLayout } from "@/components/layouts";
-import { pageNames } from "@/constant";
 import { passwordRegex, persianRegex } from "@/constant/regex_format";
 import { useI18Next } from "@/i18n";
 import { CreateOpportunityReqModel } from "@/models/auth.model";
-import { useAppDispatch } from "@/store";
 import { useCreateOpportunityMutation } from "@/store/services/auth";
 import checkNationalCode from "@/utils/check_national_code";
 import { Form, Formik } from "formik";

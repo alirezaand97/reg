@@ -8,7 +8,7 @@ body {
 }
 
 .i-button {
-  @apply relative h-12 w-full px-2 max-w-full items-center justify-center  font-yekanMedium rounded-md text-base;
+  @apply relative h-12 w-full px-2 items-center justify-center  font-yekanMedium rounded-md text-base;
 }
 
 .i-input {
@@ -45,6 +45,6 @@ body {
   background: #cbd5e0;
 }
 
-.i-error-text{
- @apply block w-full text-sm text-red-500 mt-2
+.i-error-text {
+  @apply block w-full text-sm text-red-500 mt-2;
 }
