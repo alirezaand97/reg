@@ -35,9 +35,6 @@ body {
   @apply absolute  min-w-max px-2 py-1 my-1 bg-gray-700 rounded-md text-center text-white text-sm -translate-x-1/2 left-1/2;
 }
 
-.scroll {
-  overflow-y: scroll;
-}
 .scroll::-webkit-scrollbar {
   width: 4px;
 }
@@ -45,6 +42,6 @@ body {
   background: #cbd5e0;
 }
 
-.i-error-text{
- @apply block w-full text-sm text-red-500 mt-2
+.i-error-text {
+  @apply block w-full text-sm text-red-500 mt-2;
 }
