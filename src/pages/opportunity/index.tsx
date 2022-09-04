@@ -89,7 +89,8 @@ const Lead = () => {
           }}
           validationSchema={createOpportunitySchema}
           enableReinitialize
-          onSubmit={handleCreateOpportunity}>
+          onSubmit={handleCreateOpportunity}
+        >
           {({ handleChange, errors, values, handleBlur, touched }) => (
             <Form>
               <IInput
@@ -102,6 +103,8 @@ const Lead = () => {
                 value={values.nationalCode}
                 onBlur={handleBlur}
                 touched={touched.nationalCode}
+                maxLength={10}
+                minLength={10}
               />
               <div className="mt-5 flex">
                 <div className="w-1/2 px-1">
@@ -169,7 +172,8 @@ const Lead = () => {
                 <IButton
                   className="bg-primary-200 text-white  "
                   type="submit"
-                  disabled={isLoading}>
+                  disabled={isLoading}
+                >
                   {t("general.completeInformation")}
                 </IButton>
               </div>

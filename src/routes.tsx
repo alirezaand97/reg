@@ -1,6 +1,6 @@
 import { pageNames } from "./constant";
-import { Lead, LeadOtp, Opprtunity } from "./pages";
-import RegisterSuccess from "./pages/register_success";
+import { Lead, LeadOtp, Opprtunity, RegisterSuccess, Sejam } from "./pages";
+
 
 const routes: { path: string; element: JSX.Element }[] = [
   {
@@ -18,6 +18,10 @@ const routes: { path: string; element: JSX.Element }[] = [
   {
     path: pageNames.register_success,
     element: <RegisterSuccess />,
+  },
+  {
+    path: pageNames.sejam,
+    element: <Sejam />,
   },
 ];
 export default routes;

@@ -100,6 +100,7 @@ const Register = () => {
                   value={values.phone}
                   onBlur={handleBlur}
                   touched={touched.phone}
+                  maxLength={11}
                 />
               </div>
               <div className="mt-5">
@@ -115,6 +116,8 @@ const Register = () => {
                   value={values.userCaptchaCode}
                   onBlur={handleBlur}
                   touched={touched.userCaptchaCode}
+                  maxLength={5}
+                  minLength={5}
                 />
                 <div className="mt-3">
                   <Captcha />

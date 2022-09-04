@@ -45,3 +45,14 @@ body {
 .i-error-text {
   @apply block w-full text-sm text-red-500 mt-2;
 }
+
+.i_select__control {
+  @apply h-12;
+}
+.i_select__indicator-separator {
+  @apply hidden;
+}
+
+.i_select__option:hover {
+  background-color: #f0f9ff !important;
+}
