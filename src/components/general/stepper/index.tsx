@@ -15,11 +15,13 @@ const IStepper = (props: Props) => {
           key={index}
           title={step.title}
           onClick={step.onClick}
+          stepNo={step.stepNo}
           active={
-            !(disabledSteps || []).includes(index) && index === activeStep
+            !(disabledSteps || []).includes(step.stepNo) &&
+            step.stepNo === activeStep
           }
           completed={
-            !(disabledSteps || []).includes(index) && index < activeStep
+            !(disabledSteps || []).includes(step.stepNo) && step.stepNo < activeStep
           }
         />
       ))}

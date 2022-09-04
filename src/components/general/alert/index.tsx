@@ -9,10 +9,10 @@ interface Props {
 }
 
 const servities = {
-  info: "text-blue-700 bg-blue-100",
-  danger: "text-red-700 bg-red-100",
-  success: "text-teal-700 bg-teal-50",
-  warning: "text-yellow-700 bg-yellow-100",
+  info: "text-sky-500 bg-sky-100",
+  danger: "text-rose-500 bg-rose-100",
+  success: "text-teal-500 bg-teal-50",
+  warning: "text-yellow-600 bg-yellow-100",
   dark: "text-gray-700 bg-gray-100",
 };
 
@@ -26,9 +26,7 @@ const iconColors = {
 
 const Alert = ({ severity, className, onClose, children }: Props) => {
   return (
-    <div
-      className={`.a-alert ${servities[severity]} ${className}`}
-    >
+    <div className={`i-alert ${servities[severity]} ${className}`}>
       <div>{children}</div>
       {onClose && (
         <div onClick={onClose} className="cursor-pointer mr-1">

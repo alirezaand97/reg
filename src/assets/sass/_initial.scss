@@ -52,7 +52,13 @@ body {
 .i_select__indicator-separator {
   @apply hidden;
 }
+.i_select__menu-notice--no-options {
+  @apply text-sm;
+}
 
-.i_select__option:hover {
-  background-color: #f0f9ff !important;
+.i-label {
+  @apply text-sm mb-2 inline-block;
+}
+.i_select__placeholder {
+  @apply text-sm;
 }

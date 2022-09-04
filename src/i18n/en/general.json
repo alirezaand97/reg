@@ -16,5 +16,19 @@
   "completeInformation": "complete information",
   "nationalCode": "national code",
   "password": "password",
-  "confirmPassword": "confirm password"
+  "confirmPassword": "confirm password",
+  "gender": "gender",
+  "fatherName": "father name",
+  "identityNo ": "Identity No",
+  "identitySerial": "Identity Serial",
+  "identitySeries": "Identity Series",
+  "placeOfBirth": "Place Of Birth",
+  "placeOfIssue": "Place Of Issue",
+  "birthDate": "Birth Date",
+  "day": "Day",
+  "month": "Month",
+  "year": "Year",
+  "select": "select",
+  "notFound": "not found",
+  "previous": "previous"
 }

@@ -3,6 +3,7 @@ import React from "react";
 
 export interface StepInterface {
   title?: string | React.ReactNode;
+  stepNo: number;
   active: boolean;
   completed: boolean;
   onClick?: () => void;
@@ -10,16 +11,16 @@ export interface StepInterface {
 }
 
 const IStep = (props: StepInterface) => {
-  const { active, completed, onClick, className = "" } = props;
+  const { active, completed, onClick, className = "" ,title} = props;
   return (
     <div
       className={`ml-2 rounded-md w-full max-w-full ${className}`}
       onClick={onClick}
     >
       <div
-        className={`i-step-item${
+        className={`i-step-item ${
           active
-            ? `bg-[#dbe7ff]  before:bg-primary-200 `
+            ? "bg-[#dbe7ff]  before:bg-primary-200"
             : " before:bg-gray-100"
         }
         ${completed ? "bg-primary-200 before:content-none" : "bg-white"}

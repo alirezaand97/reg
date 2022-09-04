@@ -16,6 +16,19 @@
   "completeInformation": "تکمیل  اطلاعات",
   "nationalCode": "کد ملی",
   "password": "کلمه عبور",
-  "passwordConfirm": "تکرار کلمه عبور"
-
+  "passwordConfirm": "تکرار کلمه عبور",
+  "gender": "جنسیت",
+  "fatherName": "نام پدر",
+  "identitySerial": "سریال شناسنامه",
+  "identitySeries": "سری شناسنامه",
+  "identityNo":"شماره شناسنامه",
+  "placeOfBirth": "محل تولد",
+  "placeOfIssue": "محل صدور",
+  "birthDate": "تاریخ تولد",
+  "day": "روز",
+  "month": "ماه",
+  "year": "سال",
+  "select":"انتخاب کنید",
+  "notFound":"موردی یافت نشد",
+  "previous":"قبلی"
 }
