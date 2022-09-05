@@ -8,21 +8,19 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   error?: string;
   touched?: boolean;
+  showError?: boolean;
 }
 
 const IInput = forwardRef(
   (
-    { label, className, error, touched, ...props }: Props,
+    { label, className, error, touched,showError=true, ...props }: Props,
     ref: Ref<HTMLInputElement>
   ) => {
     const [showPassword, setShowPassword] = useState<boolean>(false);
     return (
       <div className={`max-w-full w-full`}>
         {label && (
-          <label
-            htmlFor={props.id || props.name}
-            className="text-sm mb-2 inline-block"
-          >
+          <label htmlFor={props.id || props.name} className="i-label">
             {label}
           </label>
         )}
@@ -57,7 +55,7 @@ const IInput = forwardRef(
             </span>
           )}
         </div>
-        {touched && error ? (
+        {showError && touched && error ? (
           <span className="i-error-text">{error}</span>
         ) : null}
       </div>

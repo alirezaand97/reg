@@ -17,5 +17,6 @@
   "registerSuccess_message": "",
   "completeSejam": "complete sejam inforamtion",
   "loginToProfile": "login to profile",
-  "justNumberChar": "{{field}} must be number"
+  "justNumberChar": "{{field}} must be number",
+  "invalidDate":"date is invalid"
 }
