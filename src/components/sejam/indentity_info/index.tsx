@@ -118,11 +118,12 @@ const IdentityInfo = () => {
     }),
   });
 
-  const validateDate = ({ year, month, day }: BirthDate) => {
+  const validateDate = (params?: BirthDate) => {
+    const { year, month, day } = params as BirthDate;
     const dateIsValid = toJalali(`${year}-${month}-${day}`).isValid();
     if (!dateIsValid) {
       setDateError(true);
-      throw Error("تاریخ وارد شده اشتباه است");
+      throw Error("Date Error");
     }
     setDateError(false);
     return dateIsValid;

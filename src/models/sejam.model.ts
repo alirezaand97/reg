@@ -7,7 +7,7 @@ export interface SejamIdentityInfoModel<B> {
     number?: string;
     serialNo?: string;
   };
-  birthDate: B;
+  birthDate?: B;
   placeOfBirth?: string;
   placeOfIssue?: string;
 }
