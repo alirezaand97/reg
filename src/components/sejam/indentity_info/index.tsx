@@ -1,44 +1,142 @@
 import { IButton, IInput, ISelect, IStepper } from "@/components/general";
-import { jalaliMonths } from "@/constant/date_time";
-import { persianRegex } from "@/constant/regex_format";
+import { jalaliDays, jalaliMonths } from "@/constant/date_time";
+import { gender } from "@/constant/general";
+import { justNumberRegex, persianRegex } from "@/constant/regex_format";
 import sejamSteps from "@/constant/sejam_steps";
 import { useI18Next } from "@/i18n";
-import { SejamIdentityInfoModel } from "@/models/sejam.model";
+import { BirthDate, SejamIdentityInfoModel } from "@/models/sejam.model";
 import getYearsBeforeNow from "@/utils/get_years_before_now";
+import toJalali from "@/utils/to_jalali";
 import { Form, Formik } from "formik";
-import { useEffect, useState } from "react";
-import { SingleValue } from "react-select";
+import { useState } from "react";
+
 import * as Yup from "yup";
 const IdentityInfo = () => {
   const { t } = useI18Next();
-  const [yearOptions, setYearOptions] = useState([]);
-  useEffect(() => {
-    const years = getYearsBeforeNow();
-    console.log(years);
-    setYearOptions(years);
-  }, []);
-
-  const IdentityInfoData: SejamIdentityInfoModel = {};
+  const [dateError, setDateError] = useState(false);
+  const IdentityInfoData: SejamIdentityInfoModel<Date> = {};
 
   const identityInfoSchema = Yup.object().shape({
-    // firstName: Yup.string()
-    //   .label("firstName")
-    //   .required(t("messages.required", { field: t("general.firstName") }))
-    //   .matches(
-    //     persianRegex,
-    //     t("messages.justPersianChar", { field: t("general.firstName") })
-    //   ),
-    // lastName: Yup.string()
-    //   .label("lastName")
-    //   .required(t("messages.required", { field: t("general.lastName") }))
-    //   .matches(
-    //     persianRegex,
-    //     t("messages.justPersianChar", { field: t("general.lastName") })
-    //   ),
+    gender: Yup.string()
+      .label("gender")
+      .required(t("messages.selectRequired", { field: t("general.gender") })),
+    fatherName: Yup.string()
+      .label("fatherName")
+      .required(t("messages.required", { field: t("general.fatherName") }))
+      .matches(
+        persianRegex,
+        t("messages.justPersianChar", { field: t("general.fatherName") })
+      ),
+    identityCode: Yup.string()
+      .label("identityCode")
+      .required(t("messages.required", { field: t("general.identityNo") }))
+      .matches(
+        justNumberRegex,
+        t("messages.justNumberChar", { field: t("general.identityNo") })
+      )
+      .test(
+        "verificationCode",
+        t("messages.fixLength", {
+          field: t("general.identityNo"),
+          length: 10,
+        }),
+        (val) => val?.length === 10
+      ),
+    identitySerialNo: Yup.object({
+      number: Yup.string()
+        .label("number")
+        .required(
+          t("messages.required", { field: t("general.identitySerial") })
+        )
+        .matches(
+          justNumberRegex,
+          t("messages.justNumberChar", { field: t("general.identitySerial") })
+        )
+        .test(
+          "verificationCode",
+          t("messages.fixLength", {
+            field: t("general.identitySerial"),
+            length: 6,
+          }),
+          (val) => val?.length === 6
+        ),
+      serialNo: Yup.string()
+        .label("serialNo")
+        .required(
+          t("messages.required", { field: t("general.identitySeries") })
+        )
+        .matches(
+          justNumberRegex,
+          t("messages.justNumberChar", { field: t("general.identitySeries") })
+        )
+        .test(
+          "verificationCode",
+          t("messages.fixLength", {
+            field: t("general.identitySeries"),
+            length: 2,
+          }),
+          (val) => val?.length === 2
+        ),
+      character: Yup.string()
+        .label("character")
+        .required(
+          t("messages.selectRequired", {
+            field: t("general.identityCharSeries"),
+          })
+        ),
+    }),
+    placeOfBirth: Yup.string()
+      .label("placeOfBirth")
+      .required(t("messages.required", { field: t("general.placeOfBirth") }))
+      .matches(
+        persianRegex,
+        t("messages.justPersianChar", { field: t("general.placeOfBirth") })
+      ),
+    placeOfIssue: Yup.string()
+      .label("placeOfBirth")
+      .required(t("messages.required", { field: t("general.placeOfIssue") }))
+      .matches(
+        persianRegex,
+        t("messages.justPersianChar", { field: t("general.placeOfIssue") })
+      ),
+    birthDate: Yup.object({
+      year: Yup.string()
+        .label("year")
+        .required(
+          t("messages.selectRequired", { field: t("general.birthDate") })
+        ),
+      month: Yup.string()
+        .label("month")
+        .required(
+          t("messages.selectRequired", { field: t("general.birthDate") })
+        ),
+      day: Yup.string()
+        .label("day")
+        .required(
+          t("messages.selectRequired", { field: t("general.birthDate") })
+        ),
+    }),
   });
 
-  const handleCreateIdentityInfo = async (params: SejamIdentityInfoModel) => {
-    console.log(params);
+  const validateDate = (params?: BirthDate) => {
+    const { year, month, day } = params as BirthDate;
+    const dateIsValid = toJalali(`${year}-${month}-${day}`).isValid();
+    if (!dateIsValid) {
+      setDateError(true);
+      throw Error("Date Error");
+    }
+    setDateError(false);
+    return dateIsValid;
+  };
+
+  const handleCreateIdentityInfo = async (
+    params: SejamIdentityInfoModel<BirthDate>
+  ) => {
+    const isValid = validateDate(params.birthDate);
+    if (isValid) {
+      console.log("createOpportunity", params);
+    }
+
     try {
     } catch (error) {
       console.log("createOpportunity", error);
@@ -84,13 +182,14 @@ const IdentityInfo = () => {
             touched,
             setFieldValue,
             setFieldTouched,
+            setFieldError,
           }) => (
             <Form>
               <div className="flex">
                 <div className="w-1/2 mx-1">
                   <ISelect
                     name="gender"
-                    options={[{ value: "1", label: "مرد" }]}
+                    options={gender}
                     placeholder={t("general.select")}
                     label={t("general.gender")}
                     onChange={(option) =>
@@ -126,50 +225,71 @@ const IdentityInfo = () => {
                   value={values.identityCode}
                   onBlur={handleBlur}
                   touched={touched.identityCode}
+                  maxLength={10}
                 />
               </div>
-              <div className="flex mt-5 items-end">
-                <div className="w-2/4 mx-1">
-                  <IInput
-                    type="text"
-                    name="identitySerialNo.number"
-                    placeholder="000000"
-                    label={t("general.identitySerial")}
-                    onChange={handleChange}
-                    error={errors.identitySerialNo?.number}
-                    value={values.identitySerialNo?.number}
-                    onBlur={handleBlur}
-                    touched={touched.identitySerialNo?.number}
-                  />
+              <div className="mt-5">
+                <div className="i-label">{t("general.identitySerial")}</div>
+                <div className="flex flex-end">
+                  <div className="w-2/4 mx-1">
+                    <IInput
+                      type="text"
+                      name="identitySerialNo.number"
+                      placeholder="000000"
+                      onChange={handleChange}
+                      error={errors.identitySerialNo?.number}
+                      value={values.identitySerialNo?.number}
+                      onBlur={handleBlur}
+                      touched={touched.identitySerialNo?.number}
+                      maxLength={6}
+                      showError={false}
+                    />
+                  </div>
+                  <div className="w-1/4 mx-1">
+                    <IInput
+                      type="text"
+                      name="identitySerialNo.serialNo"
+                      placeholder="00"
+                      onChange={handleChange}
+                      error={errors.identitySerialNo?.serialNo}
+                      value={values.identitySerialNo?.serialNo}
+                      onBlur={handleBlur}
+                      touched={touched.identitySerialNo?.serialNo}
+                      maxLength={2}
+                      showError={false}
+                    />
+                  </div>
+                  <div className="w-1/4 mx-1">
+                    <ISelect
+                      name="identitySerialNo.character"
+                      options={[
+                        { value: "الف", label: "الف" },
+                        { value: "ب", label: "ب" },
+                      ]}
+                      placeholder={t("general.select")}
+                      getOptionValue={(option) => option.value}
+                      onChange={(option) =>
+                        setFieldValue(
+                          "identitySerialNo.character",
+                          option?.value
+                        )
+                      }
+                      onBlur={() =>
+                        setFieldTouched("identitySerialNo.character")
+                      }
+                      touched={touched.identitySerialNo?.character}
+                      error={errors.identitySerialNo?.character}
+                      showError={false}
+                    />
+                  </div>
                 </div>
-                <div className="w-1/4 mx-1">
-                  <IInput
-                    type="text"
-                    name="identitySerialNo.serialNo"
-                    placeholder="00"
-                    onChange={handleChange}
-                    error={errors.identitySerialNo?.serialNo}
-                    value={values.identitySerialNo?.serialNo}
-                    onBlur={handleBlur}
-                    touched={touched.identitySerialNo?.serialNo}
-                  />
-                </div>
-                <div className="w-1/4 mx-1">
-                  <ISelect
-                    name="identitySerialNo.character"
-                    options={[
-                      { value: "الف", label: "الف" },
-                      { value: "ب", label: "ب" },
-                    ]}
-                    placeholder={t("general.select")}
-                    getOptionValue={(option) => option.value}
-                    onChange={(option) =>
-                      setFieldValue("identitySerialNo.character", option?.value)
-                    }
-                    onBlur={() => setFieldTouched("identitySerialNo.character")}
-                    touched={touched.identitySerialNo?.character}
-                    error={errors.identitySerialNo?.character}
-                  />
+                <div className="i-error-text">
+                  {(touched.identitySerialNo?.number &&
+                    errors.identitySerialNo?.number) ||
+                    (touched.identitySerialNo?.serialNo &&
+                      errors.identitySerialNo?.serialNo) ||
+                    (touched.identitySerialNo?.character &&
+                      errors.identitySerialNo?.character)}
                 </div>
               </div>
               <div className="flex mt-5">
@@ -200,51 +320,57 @@ const IdentityInfo = () => {
                   />
                 </div>
               </div>
-
-              <div className="flex mt-5 items-end">
-                <div className="w-1/3 mx-1">
-                  <ISelect
-                    name="birthDate.day"
-                    options={[]}
-                    placeholder={t("general.day")}
-                    getOptionValue={(option) => option.value}
-                    onChange={(option) =>
-                      setFieldValue("birthDate.day", option?.value)
-                    }
-                    onBlur={() => setFieldTouched("birthDate.day")}
-                    touched={touched.birthDate?.day}
-                    error={errors.birthDate?.day}
-                    label={t("general.day")}
-                  />
+              <div className="mt-5">
+                <div className="i-label">{t("general.birthDate")}</div>
+                <div className="flex items-end">
+                  <div className="w-1/3 mx-1">
+                    <ISelect
+                      name="birthDate.day"
+                      options={jalaliDays}
+                      placeholder={t("general.day")}
+                      onChange={(option) =>
+                        setFieldValue("birthDate.day", option?.value)
+                      }
+                      onBlur={() => setFieldTouched("birthDate.day")}
+                      error={errors.birthDate?.day}
+                      touched={touched.birthDate?.day}
+                      showError={false}
+                    />
+                  </div>
+                  <div className="w-1/3 mx-1">
+                    <ISelect
+                      name="birthDate.month"
+                      options={jalaliMonths}
+                      placeholder={t("general.month")}
+                      onChange={(option) =>
+                        setFieldValue("birthDate.month", option?.value)
+                      }
+                      onBlur={() => setFieldTouched("birthDate.month")}
+                      error={errors.birthDate?.month}
+                      touched={touched.birthDate?.month}
+                      showError={false}
+                    />
+                  </div>
+                  <div className="w-1/3 mx-1">
+                    <ISelect
+                      name="birthDate.year"
+                      options={getYearsBeforeNow()}
+                      placeholder={t("general.year")}
+                      onChange={(option) =>
+                        setFieldValue("birthDate.year", option?.value)
+                      }
+                      onBlur={() => setFieldTouched("birthDate.year")}
+                      error={errors.birthDate?.year}
+                      touched={touched.birthDate?.year}
+                      showError={false}
+                    />
+                  </div>
                 </div>
-                <div className="w-1/3 mx-1">
-                  <ISelect
-                    name="birthDate.month"
-                    options={jalaliMonths}
-                    placeholder={t("general.month")}
-                    getOptionValue={(option) => option.value}
-                    onChange={(option) =>
-                      setFieldValue("birthDate.month", option?.value)
-                    }
-                    onBlur={() => setFieldTouched("birthDate.month")}
-                    touched={touched.birthDate?.month}
-                    error={errors.birthDate?.month}
-                    label={t("general.month")}
-                  />
-                </div>
-                <div className="w-1/3 mx-1">
-                  <ISelect
-                    name="birthDate.year"
-                    options={yearOptions}
-                    placeholder={t("general.year")}
-                    onChange={(option) =>
-                      setFieldValue("birthDate.year", option?.value)
-                    }
-                    onBlur={() => setFieldTouched("birthDate.year")}
-                    touched={touched.birthDate?.year}
-                    error={errors.birthDate?.year}
-                    label={t("general.year")}
-                  />
+                <div className="i-error-text">
+                  {(touched.birthDate?.year && errors.birthDate?.year) ||
+                    (touched.birthDate?.month && errors.birthDate?.month) ||
+                    (touched.birthDate?.day && errors.birthDate?.day) ||
+                    (dateError && t("messages.invalidDate"))}
                 </div>
               </div>
 

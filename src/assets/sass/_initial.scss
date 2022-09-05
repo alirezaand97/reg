@@ -14,7 +14,6 @@ body {
 .i-input {
   @apply w-full h-full text-base border bg-white rounded-md flex items-center outline-none px-4 hover:border-neutral-300 hover:bg-neutral-50 focus:border-2 focus:border-primary-200 placeholder:text-sm;
 }
-
 .i-alert {
   @apply w-full max-w-full flex justify-between items-center p-4 mb-4 text-base rounded-md;
 }
@@ -61,4 +60,8 @@ body {
 }
 .i_select__placeholder {
   @apply text-sm;
+}
+
+.i-label{
+  @apply text-sm mb-2 inline-block
 }

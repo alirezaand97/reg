@@ -11,7 +11,7 @@ const AuthLayout = (props: Props) => {
             <div className="xl:w-9/12 w-full h-full">
               <div className="block bg-white sm:shadow-lg rounded-lg h-full">
                 <div className="lg:flex py-12 px-2 md:px-12  flex-wrap h-full">
-                  <div className="w-full lg:w-6/12 xl:w-5/12 h-full scroll overflow-y-auto">
+                  <div className="w-full lg:w-6/12 xl:w-5/12 h-full scroll sm:overflow-y-auto">
                     <div className="md:mx-6">{props.children}</div>
                   </div>
                   <div className="hidden lg:w-6/12 xl:w-7/12 lg:flex pr-8 items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none h-full">

@@ -1,6 +1,7 @@
 {
   "codeSent": "Code sent successfully",
   "required": "Enter the {{field}} ",
+  "selectRequired":"Select the {{field}} ",
   "requireMessage": "This field is required",
   "minLengthError": "The {{field}} must be at least {{min}}  characters long ",
   "maxLengthError": "The {{field}} must be at most {{max}}  characters long ",
@@ -11,11 +12,11 @@
   "enterOtpCde": "Enter the OTP you received via SMS",
   "editField": "Edit {{field}}",
   "alreadyRegister": "already exist",
-  "passwordConfirmError":"password not match",
-  "registerSuccess":"your account was successfully registered",
-  "registerSuccess_message":"",
-  "completeSejam":"complete sejam inforamtion",
-  "loginToProfile":"login to profile"
-  
-
+  "passwordConfirmError": "password not match",
+  "registerSuccess": "your account was successfully registered",
+  "registerSuccess_message": "",
+  "completeSejam": "complete sejam inforamtion",
+  "loginToProfile": "login to profile",
+  "justNumberChar": "{{field}} must be number",
+  "invalidDate":"date is invalid"
 }

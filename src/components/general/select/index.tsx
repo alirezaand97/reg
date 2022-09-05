@@ -1,10 +1,10 @@
 import { useI18Next } from "@/i18n";
-import { t } from "i18next";
-import Select, { GroupBase, Props, OnChangeValue } from "react-select";
+import Select, { GroupBase, Props, StylesConfig } from "react-select";
 interface Custom {
   error?: string;
   touched?: boolean;
   label?: string;
+  showError?: boolean;
 }
 function ISelect<
   Option,
@@ -12,24 +12,29 @@ function ISelect<
   Group extends GroupBase<Option> = GroupBase<Option>
 >(props: Props<Option, IsMulti, Group> & Custom) {
   const { t } = useI18Next();
+  const { label, showError = true, name, id, error, touched } = props;
 
+  const customStyles: StylesConfig<Option, IsMulti, Group> = {
+    control: (provided: Record<string, unknown>, state: any) => ({
+      ...provided,
+      border: touched && error ? "1px solid red" : "1px solid #cccccc",
+    }),
+  };
   return (
     <div>
-      {props.label && (
-        <label
-          htmlFor={props.id || props.name}
-          className="text-sm mb-2 inline-block"
-        >
-          {props.label}
+      {label && (
+        <label htmlFor={id || name} className="text-sm mb-2 inline-block">
+          {label}
         </label>
       )}
       <Select
         {...props}
+        styles={customStyles}
         classNamePrefix="i_select"
         noOptionsMessage={() => t("general.notFound")}
       />
-      {props.touched && props.error ? (
-        <span className="i-error-text">{props.error}</span>
+      {showError && touched && error ? (
+        <span className="i-error-text">{error}</span>
       ) : null}
     </div>
   );
