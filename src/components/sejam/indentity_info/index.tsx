@@ -1,48 +1,113 @@
 import { IButton, IInput, ISelect, IStepper } from "@/components/general";
-import { jalaliMonths } from "@/constant/date_time";
-import { persianRegex } from "@/constant/regex_format";
+import { jalaliDays, jalaliMonths } from "@/constant/date_time";
+import { justNumberRegex, persianRegex } from "@/constant/regex_format";
 import sejamSteps from "@/constant/sejam_steps";
 import { useI18Next } from "@/i18n";
-import { SejamIdentityInfoModel } from "@/models/sejam.model";
+import { BirthDate, SejamIdentityInfoModel } from "@/models/sejam.model";
 import getYearsBeforeNow from "@/utils/get_years_before_now";
 import { Form, Formik } from "formik";
-import { useEffect, useState } from "react";
-import { SingleValue } from "react-select";
+import { useState } from "react";
+
 import * as Yup from "yup";
 const IdentityInfo = () => {
   const { t } = useI18Next();
-  const [yearOptions, setYearOptions] = useState([]);
-  useEffect(() => {
-    const years = getYearsBeforeNow();
-    console.log(years);
-    setYearOptions(years);
-  }, []);
-
-  const IdentityInfoData: SejamIdentityInfoModel = {};
+  const [dateError, setDateError] = useState(false);
+  const IdentityInfoData: SejamIdentityInfoModel<Date> = {};
 
   const identityInfoSchema = Yup.object().shape({
-    // firstName: Yup.string()
-    //   .label("firstName")
-    //   .required(t("messages.required", { field: t("general.firstName") }))
-    //   .matches(
-    //     persianRegex,
-    //     t("messages.justPersianChar", { field: t("general.firstName") })
-    //   ),
-    // lastName: Yup.string()
-    //   .label("lastName")
-    //   .required(t("messages.required", { field: t("general.lastName") }))
-    //   .matches(
-    //     persianRegex,
-    //     t("messages.justPersianChar", { field: t("general.lastName") })
-    //   ),
+    gender: Yup.string()
+      .label("gender")
+      .required(t("messages.selectRequired", { field: t("general.gender") })),
+    fatherName: Yup.string()
+      .label("fatherName")
+      .required(t("messages.required", { field: t("general.fatherName") }))
+      .matches(
+        persianRegex,
+        t("messages.justPersianChar", { field: t("general.fatherName") })
+      ),
+    identityCode: Yup.string()
+      .label("identityCode")
+      .required(t("messages.required", { field: t("general.identityNo") }))
+      .matches(
+        justNumberRegex,
+        t("messages.justNumberChar", { field: t("general.identityNo") })
+      )
+      .max(
+        10,
+        t("messages.maxLengthError", {
+          field: t("general.identityNo"),
+          max: 10,
+        })
+      ),
+    identitySerialNo: Yup.object({
+      number: Yup.string()
+        .label("number")
+        .required(
+          t("messages.required", { field: t("general.identitySerial") })
+        )
+        .max(
+          6,
+          t("messages.maxLengthError", {
+            field: t("general.identityNo"),
+            max: 6,
+          })
+        ),
+      serialNo: Yup.string()
+        .label("serialNo")
+        .required(
+          t("messages.required", { field: t("general.identitySeries") })
+        )
+        .max(
+          2,
+          t("messages.maxLengthError", {
+            field: t("general.identityNo"),
+            max: 2,
+          })
+        ),
+      character: Yup.string()
+        .label("character")
+        .required(
+          t("messages.selectRequired", {
+            field: t("general.identityCharSeries"),
+          })
+        ),
+    }),
+    placeOfBirth: Yup.string()
+      .label("placeOfBirth")
+      .required(t("messages.required", { field: t("general.placeOfBirth") }))
+      .matches(
+        persianRegex,
+        t("messages.justPersianChar", { field: t("general.placeOfBirth") })
+      ),
+    placeOfIssue: Yup.string()
+      .label("placeOfBirth")
+      .required(t("messages.required", { field: t("general.placeOfIssue") }))
+      .matches(
+        persianRegex,
+        t("messages.justPersianChar", { field: t("general.placeOfIssue") })
+      ),
+    birthDate: Yup.object({
+      year: Yup.string()
+        .label("year")
+        .required(t("messages.selectRequired", { field: t("general.year") })),
+      month: Yup.string()
+        .label("month")
+        .required(t("messages.selectRequired", { field: t("general.month") })),
+      day: Yup.string()
+        .label("day")
+        .required(t("messages.selectRequired", { field: t("general.day") })),
+    }),
   });
 
-  const handleCreateIdentityInfo = async (params: SejamIdentityInfoModel) => {
-    console.log(params);
+  const handleCreateIdentityInfo = async (
+    params: SejamIdentityInfoModel<BirthDate>
+  ) => {
+    console.log(params.birthDate?.month);
     try {
     } catch (error) {
       console.log("createOpportunity", error);
     }
+    console.log("createOpportunity", params);
   };
 
   return (
@@ -84,13 +149,17 @@ const IdentityInfo = () => {
             touched,
             setFieldValue,
             setFieldTouched,
+            setFieldError,
           }) => (
             <Form>
               <div className="flex">
                 <div className="w-1/2 mx-1">
                   <ISelect
                     name="gender"
-                    options={[{ value: "1", label: "مرد" }]}
+                    options={[
+                      { value: 1, label: "مرد" },
+                      { value: 1, label: "زن" },
+                    ]}
                     placeholder={t("general.select")}
                     label={t("general.gender")}
                     onChange={(option) =>
@@ -126,6 +195,7 @@ const IdentityInfo = () => {
                   value={values.identityCode}
                   onBlur={handleBlur}
                   touched={touched.identityCode}
+                  maxLength={10}
                 />
               </div>
               <div className="flex mt-5 items-end">
@@ -140,6 +210,7 @@ const IdentityInfo = () => {
                     value={values.identitySerialNo?.number}
                     onBlur={handleBlur}
                     touched={touched.identitySerialNo?.number}
+                    maxLength={6}
                   />
                 </div>
                 <div className="w-1/4 mx-1">
@@ -152,6 +223,7 @@ const IdentityInfo = () => {
                     value={values.identitySerialNo?.serialNo}
                     onBlur={handleBlur}
                     touched={touched.identitySerialNo?.serialNo}
+                    maxLength={2}
                   />
                 </div>
                 <div className="w-1/4 mx-1">
@@ -205,9 +277,8 @@ const IdentityInfo = () => {
                 <div className="w-1/3 mx-1">
                   <ISelect
                     name="birthDate.day"
-                    options={[]}
+                    options={jalaliDays}
                     placeholder={t("general.day")}
-                    getOptionValue={(option) => option.value}
                     onChange={(option) =>
                       setFieldValue("birthDate.day", option?.value)
                     }
@@ -222,7 +293,6 @@ const IdentityInfo = () => {
                     name="birthDate.month"
                     options={jalaliMonths}
                     placeholder={t("general.month")}
-                    getOptionValue={(option) => option.value}
                     onChange={(option) =>
                       setFieldValue("birthDate.month", option?.value)
                     }
@@ -235,7 +305,7 @@ const IdentityInfo = () => {
                 <div className="w-1/3 mx-1">
                   <ISelect
                     name="birthDate.year"
-                    options={yearOptions}
+                    options={getYearsBeforeNow()}
                     placeholder={t("general.year")}
                     onChange={(option) =>
                       setFieldValue("birthDate.year", option?.value)

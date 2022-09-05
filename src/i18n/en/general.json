@@ -22,6 +22,7 @@
   "identityNo ": "Identity No",
   "identitySerial": "Identity Serial",
   "identitySeries": "Identity Series",
+  "identityCharSeries": "Identity Char Series",
   "placeOfBirth": "Place Of Birth",
   "placeOfIssue": "Place Of Issue",
   "birthDate": "Birth Date",

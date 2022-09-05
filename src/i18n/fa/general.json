@@ -21,6 +21,7 @@
   "fatherName": "نام پدر",
   "identitySerial": "سریال شناسنامه",
   "identitySeries": "سری شناسنامه",
+  "identityCharSeries": "سری حرفی شناسنامه",
   "identityNo":"شماره شناسنامه",
   "placeOfBirth": "محل تولد",
   "placeOfIssue": "محل صدور",

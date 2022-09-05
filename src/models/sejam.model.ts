@@ -1,4 +1,4 @@
-export interface SejamIdentityInfoModel {
+export interface SejamIdentityInfoModel<B> {
   gender?: string;
   fatherName?: string;
   identityCode?: string;
@@ -7,13 +7,13 @@ export interface SejamIdentityInfoModel {
     number?: string;
     serialNo?: string;
   };
-  birthDate?: string | BirthDate;
+  birthDate?: B;
   placeOfBirth?: string;
   placeOfIssue?: string;
 }
 
-interface BirthDate {
-  year?: string;
-  month?: string;
-  day?: string;
+export interface BirthDate {
+  year: string;
+  month: string;
+  day: string;
 }
